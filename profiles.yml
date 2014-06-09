@@ -1,0 +1,6 @@
+dev-cmp04.na.getgooddata.com:
+  :roles:
+    - compute
+dev-cmp06.na.getgooddata.com:
+  :roles:
+    - compute
