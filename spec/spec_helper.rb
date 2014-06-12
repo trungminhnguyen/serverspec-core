@@ -17,7 +17,5 @@ RSpec.configure do |c|
   c.os    = backend.check_os
 
   tags = (ENV['TARGET_TAGS'] || '').split(',')
-  c.filter_run_excluding tag: lambda do |t|
-    !tags.include?(t)
-  end
+  c.filter_run_excluding tag: ->(t) { !tags.include?(t) }
 end

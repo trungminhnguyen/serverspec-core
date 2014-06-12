@@ -6,7 +6,7 @@ require 'json'
 require 'yaml'
 
 @hosts    = './hosts.yml'           # List of all hosts
-@reports  = './reports'         # Where to store JSON reports
+@@reports  = './reports'         # Where to store JSON reports
 
 # Special version of RakeTask for serverspec which comes with better
 # reporting
@@ -16,7 +16,7 @@ class ServerspecTask < RSpec::Core::RakeTask
 
   # Run our serverspec task. Errors are ignored.
   def run_task(verbose)
-    json = "#{@REPORTS}/current/#{target}.json"
+    json = "#{@@reports}/current/#{target}.json"
     @rspec_opts = ['--format', 'json', '--out', json]
     system("env TARGET_HOST=#{target} TARGET_TAGS=#{(tags || [])
            .join(',')} #{spec_command}")
@@ -78,12 +78,12 @@ end
 namespace :reports do
   desc 'Clean up old partial reports'
   task :clean do
-    FileUtils.rm_rf "#{@REPORTS}/current"
+    FileUtils.rm_rf "#{@@reports}/current"
   end
 
   desc 'Clean reports without results'
   task :housekeep do
-    files = FileList.new("#{@REPORTS}/*.json").map do |f|
+    files = FileList.new("#{@@reports}/*.json").map do |f|
       content = File.read(f)
       if content.empty?
         # No content, let's remove it
@@ -108,7 +108,7 @@ namespace :reports do
 
   desc 'Gzip all reports'
   task :gzip do
-    FileList.new("#{@REPORTS}/*.json").each do |f|
+    FileList.new("#{@@reports}/*.json").each do |f|
       system 'gzip', f
     end
   end
@@ -118,11 +118,11 @@ namespace :reports do
   task :build, :tasks do |_t, args|
     args.with_defaults(tasks: ['unspecified'])
     now = Time.now
-    fname = format("#{@REPORTS}/%s--%s.json",
+    fname = format("#{@@reports}/%s--%s.json",
                    args[:tasks].join('-'), now.strftime('%Y-%m-%dT%H:%M:%S'))
     File.open(fname, 'w') do |f|
       # Test results
-      tests = FileList.new("#{@REPORTS}/current/*.json").sort.map do |j|
+      tests = FileList.new("#{@@reports}/current/*.json").sort.map do |j|
         content = File.read(j).strip
         {
           hostname: File.basename(j, '.json'),
@@ -130,7 +130,7 @@ namespace :reports do
         }
       end.to_a
       # Relevant source files
-      sources = FileList.new("#{@REPORTS}/current/*.json").sort.map do |j|
+      sources = FileList.new("#{@@reports}/current/*.json").sort.map do |j|
         content = File.read(j).strip
         results = JSON.parse(
                       content.empty? ? '{"examples": []}' : content)['examples']
