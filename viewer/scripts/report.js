@@ -465,7 +465,7 @@ var formatResults = function(input) {
                                                 })
                                             });
                            });
-            return { "name": h.hostname,
+            return { "name": h.hostname.split(".").slice(0,3).join("."),
                      "success": success,
                      "failure": failure,
                      "color": successColor(success, failure),
