@@ -1,2 +1,5 @@
+Gemfile.lock
+Gemfile.local
+/reports/
 bundle/
 .bundle/
