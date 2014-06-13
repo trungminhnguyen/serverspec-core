@@ -17,7 +17,7 @@ class ServerspecTask < RSpec::Core::RakeTask
   # Run our serverspec task. Errors are ignored.
   def run_task(verbose)
     json = "#{@@reports}/current/#{target}.json"
-    @rspec_opts = ['--format', 'json', '--out', json]
+    @rspec_opts = ['-c', '-f', 'progress', '--format', 'json', '--out', json]
     system("env TARGET_HOST=#{target} TARGET_TAGS=#{(tags || [])
            .join(',')} #{spec_command}")
     status(target, json) if verbose
