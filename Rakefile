@@ -137,7 +137,7 @@ namespace :reports do
         results.map { |r| r['file_path'] }
       end.to_a.flatten(1).uniq
       sources = sources.each_with_object(Hash.new) do |file, h|
-        h[file] = File.readlines(f).map { |l| l.chomp }.to_a
+        h[file] = File.readlines(file).map { |l| l.chomp }.to_a
       end
       json_hash = { version: 1,
                     tests: tests,
