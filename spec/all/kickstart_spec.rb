@@ -300,4 +300,28 @@ describe 'Linux kernel parameters' do
   context linux_kernel_parameter('net.ipv4.ip_local_port_range') do
     its(:value) { should eq "30000\t65000" }
   end
+  context linux_kernel_parameter('net.ipv4.ip_forward') do
+    its(:value) { should eq 1 }
+  end
+end
+
+#resolv.conf
+
+resolv_conf='domain na.getgooddata.com
+search na.getgooddata.com getgooddata.com gooddata.com
+nameserver 173.203.4.8
+nameserver 173.203.4.9
+nameserver 8.8.8.8
+nameserver 8.8.4.4'
+
+describe file('/etc/resolv.conf') do
+  its(:content) {should match resolv_conf}
+end
+
+conntrack_conf='install nf_conntrack /sbin/modprobe --ignore-install nf_conntrack; sysctl -w net.netfilter.nf_conntrack_max=655360
+install nf_conntrack_ipv4 /sbin/modprobe --ignore-install nf_conntrack_ipv4; sysctl -w net.netfilter.nf_conntrack_max=655360
+options nf_conntrack hashsize=163840'
+
+describe file('/etc/modprobe.d/conntrack.conf') do
+    its(:content) {should match conntrack_conf}
 end
