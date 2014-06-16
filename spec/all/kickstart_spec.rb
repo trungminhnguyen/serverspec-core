@@ -250,3 +250,54 @@ describe command('lvscan|grep nova-instances') do
   it { should return_stdout /ACTIVE\s*'\/dev\/nova-volumes\/nova-instances'\s\[\d{2}\.\d{2} GiB\]\sinherit/ }
 end
 
+partitions='/
+/boot
+/boot/efi
+/home
+/var
+/var/log'
+
+partitions.split.each do |partition|
+  describe file(partition) do
+    it { should be_mounted }
+  end
+end
+
+# Swap size check
+describe 'swapsize' do
+  it 'should be big enough' do
+    swapsize = command("free -m|tail -1| awk '{print $2}'").stdout.to_i
+    swapsize.should >= 4096
+  end
+end
+
+# Maintenance user(s)
+describe file('/root/.ssh') do
+    it { should be_directory }
+    it { should be_mode 700 }
+end
+
+# OS tweaks
+describe 'Linux kernel parameters' do
+  context linux_kernel_parameter('vm.swappiness') do
+    its(:value) { should eq 10 }
+  end
+  context linux_kernel_parameter('vm.dirty_expire_centisecs') do
+    its(:value) { should eq 3000 }
+  end
+  context linux_kernel_parameter('vm.dirty_ratio') do
+    its(:value) { should eq 12 }
+  end
+  context linux_kernel_parameter('vm.dirty_writeback_centisecs') do
+    its(:value) { should eq 500 }
+  end
+  context linux_kernel_parameter('vm.dirty_background_ratio') do
+    its(:value) { should eq 3 }
+  end
+  context linux_kernel_parameter('kernel.sem') do
+    its(:value) { should eq "500\t256000\t250\t1024" }
+  end
+  context linux_kernel_parameter('net.ipv4.ip_local_port_range') do
+    its(:value) { should eq "30000\t65000" }
+  end
+end
