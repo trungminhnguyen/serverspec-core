@@ -8,6 +8,8 @@ describe selinux do
     it { should be_permissive }
 end
 
+# Packages
+
 packages = 'xfsprogs
 dosfstools
 e2fsprogs
@@ -171,6 +173,8 @@ not_installed_packages.split.each do |package|
   end
 end
 
+# Repos
+
 os = backend(Serverspec::Commands::Base).check_os
 repos = "epel
 deployment-proxy
@@ -226,3 +230,23 @@ monitored_services.split.each do |service|
     it { should be_monitored_by('monit') }
   end
 end
+
+# Networking
+
+describe host('mgmt-api01.na.getgooddata.com') do
+  # ping
+   it { should be_reachable }
+end
+
+# Paritioning
+
+# There is a cleaner way, but it's buggy
+# Issue reported upstream https://github.com/serverspec/serverspec/issues/430
+describe command('mount | grep /dev/mapper/nova--volumes-nova--instances') do
+  it { should return_stdout '/dev/mapper/nova--volumes-nova--instances on /var/lib/nova type ext4 (rw,noatime)' }
+end
+
+describe command('lvscan|grep nova-instances') do
+  it { should return_stdout /ACTIVE\s*'\/dev\/nova-volumes\/nova-instances'\s\[\d{2}\.\d{2} GiB\]\sinherit/ }
+end
+
