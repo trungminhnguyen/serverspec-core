@@ -182,3 +182,47 @@ repos.split.each do |repo|
       it { should be_enabled }
   end
 end
+
+# Services
+
+enabled_services='network
+sshd
+ntpd
+ntpdate
+rsyslog
+restorecond
+monit
+libvirtd'
+
+enabled_services.split.each do |service|
+  describe service(service) do
+    it { should be_enabled }
+    it { should be_running }
+  end
+end
+
+disabled_services='netfs
+cups
+autofs
+xinetd
+rpcbind
+rpcgssd
+rpcidmapd
+nfslock
+libvirt-guests'
+
+disabled_services.split.each do |service|
+  describe service(service) do
+    it { should_not be_enabled }
+    it { should_not be_running }    
+  end
+end
+
+monitored_services='libvirtd
+libvirt-guests'
+
+monitored_services.split.each do |service|
+  describe service(service) do
+    it { should be_monitored_by('monit') }
+  end
+end
