@@ -279,6 +279,7 @@ end
 
 # OS tweaks
 describe 'Linux kernel parameters' do
+  # Check if correct options are in action
   context linux_kernel_parameter('vm.swappiness') do
     its(:value) { should eq 10 }
   end
@@ -303,6 +304,34 @@ describe 'Linux kernel parameters' do
   context linux_kernel_parameter('net.ipv4.ip_forward') do
     its(:value) { should eq 1 }
   end
+  context linux_kernel_parameter('net.bridge.bridge-nf-call-ip6tables') do
+    its(:value) { should eq 1 }
+  end
+  context linux_kernel_parameter('net.bridge.bridge-nf-call-iptables') do
+    its(:value) { should eq 1 }
+  end
+  context linux_kernel_parameter('net.bridge.bridge-nf-call-arptable') do
+    its(:value) { should eq 1 }
+  end
+
+  # Check if correct options are specified in file
+  # Pay attention to ^ and $ in regexps
+  describe file('/etc/sysctl.conf') do
+     sysctl_options = '^vm.swappiness = 10$
+^vm.dirty_expire_centisecs = 3000$
+^vm.dirty_ratio = 12$
+^vm.dirty_writeback_centisecs = 500$
+^vm.dirty_background_ratio = 3$
+^kernel.sem = 500 256000 250 1024$
+^net.ipv4.ip_local_port_range = 30000 65000$
+^net.ipv4.ip_forward = 1$
+^net.bridge.bridge-nf-call-ip6tables = 1$
+^net.bridge.bridge-nf-call-iptables = 1$
+^net.bridge.bridge-nf-call-arptables = 1$'
+     sysctl_options.split.each do |option|
+       its(:content) { should match Regexp.new(option) }
+     end
+  end
 end
 
 #resolv.conf
@@ -318,10 +347,19 @@ describe file('/etc/resolv.conf') do
   its(:content) {should match resolv_conf}
 end
 
-conntrack_conf='install nf_conntrack /sbin/modprobe --ignore-install nf_conntrack; sysctl -w net.netfilter.nf_conntrack_max=655360
+describe 'conntrack' do
+  conntrack_conf='install nf_conntrack /sbin/modprobe --ignore-install nf_conntrack; sysctl -w net.netfilter.nf_conntrack_max=655360
 install nf_conntrack_ipv4 /sbin/modprobe --ignore-install nf_conntrack_ipv4; sysctl -w net.netfilter.nf_conntrack_max=655360
 options nf_conntrack hashsize=163840'
 
-describe file('/etc/modprobe.d/conntrack.conf') do
-    its(:content) {should match conntrack_conf}
+  describe file('/etc/modprobe.d/conntrack.conf') do
+      its(:content) { should match conntrack_conf }
+  end
+  context linux_kernel_parameter('net.netfilter.nf_conntrack_max') do
+    its(:value) { should eq 655360 }
+  end
+end
+
+describe file('/proc/cmdline') do
+  its(:content) { should match /elevator=deadline intremap=no_x2apic_optout nomodeset video=efifb/ }
 end
