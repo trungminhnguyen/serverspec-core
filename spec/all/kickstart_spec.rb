@@ -238,6 +238,14 @@ describe host('mgmt-api01.na.getgooddata.com') do
    it { should be_reachable }
 end
 
+describe interface('bond0.279') do
+  its(:speed) { should eq 10000 }
+end
+
+describe interface('bond1.282') do
+  its(:speed) { should eq 10000 }
+end
+
 # Paritioning
 
 # There is a cleaner way, but it's buggy
@@ -357,6 +365,9 @@ options nf_conntrack hashsize=163840'
   end
   context linux_kernel_parameter('net.netfilter.nf_conntrack_max') do
     its(:value) { should eq 655360 }
+  end
+  describe kernel_module('nf_conntrack') do
+    it { should be_loaded}
   end
 end
 
