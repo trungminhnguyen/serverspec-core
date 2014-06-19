@@ -222,8 +222,7 @@ disabled_services.split.each do |service|
   end
 end
 
-monitored_services='libvirtd
-libvirt-guests'
+monitored_services='libvirtd'
 
 monitored_services.split.each do |service|
   describe service(service) do
