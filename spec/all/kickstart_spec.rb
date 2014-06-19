@@ -89,7 +89,7 @@ bridge-utils
 dhclient
 eject
 fprintd-pam
-gnupg
+gnupg2
 irqbalance
 lvm2
 microcode_ctl
