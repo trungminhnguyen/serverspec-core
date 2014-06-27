@@ -62,7 +62,6 @@ puppet
 pv
 python-simplejson
 PyXML
-rrdtool-perl
 rsyslog-gnutls
 screen
 selinux-policy-targeted
@@ -177,9 +176,9 @@ end
 
 os = backend(Serverspec::Commands::Base).check_os
 repos = "epel
-deployment-proxy
+gdc
 3rdparty
-sl#{os[:release]}"
+sl"
 
 repos.split.each do |repo|
   describe yumrepo(repo) do
@@ -196,7 +195,10 @@ ntpdate
 rsyslog
 restorecond
 monit
-libvirtd'
+libvirtd
+netfs
+rpcbind
+rpcidmapd'
 
 enabled_services.split.each do |service|
   describe service(service) do
@@ -205,15 +207,16 @@ enabled_services.split.each do |service|
   end
 end
 
-disabled_services='netfs
+disabled_services='rpcgssd
 cups
 autofs
 xinetd
-rpcbind
-rpcgssd
-rpcidmapd
-nfslock
 libvirt-guests'
+
+describe service 'nfslock' do
+  it { should_not be_enabled }
+  it { should be_running }
+end
 
 disabled_services.split.each do |service|
   describe service(service) do
