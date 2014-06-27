@@ -314,14 +314,17 @@ describe 'Linux kernel parameters' do
   context linux_kernel_parameter('net.ipv4.ip_forward') do
     its(:value) { should eq 1 }
   end
-  context linux_kernel_parameter('net.bridge.bridge-nf-call-ip6tables') do
-    its(:value) { should eq 1 }
-  end
-  context linux_kernel_parameter('net.bridge.bridge-nf-call-iptables') do
-    its(:value) { should eq 1 }
-  end
-  context linux_kernel_parameter('net.bridge.bridge-nf-call-arptables') do
-    its(:value) { should eq 1 }
+  has_bridge = command('brctl show | tail -n+2').stdout.length > 0
+  context 'if bridge exists', if: has_bridge do
+    context linux_kernel_parameter('net.bridge.bridge-nf-call-ip6tables') do
+      its(:value) { should eq 1 }
+    end
+    context linux_kernel_parameter('net.bridge.bridge-nf-call-iptables') do
+      its(:value) { should eq 1 }
+    end
+    context linux_kernel_parameter('net.bridge.bridge-nf-call-arptables') do
+      its(:value) { should eq 1 }
+    end
   end
 
   # Check if correct options are specified in file
