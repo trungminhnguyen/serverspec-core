@@ -315,23 +315,41 @@ describe 'Linux kernel parameters' do
     its(:value) { should eq 1 }
   end
 
-  # Check if correct options are specified in file
+  # Check if correct options are specified in sysctl.d files
   # Pay attention to ^ and $ in regexps
-  describe file('/etc/sysctl.conf') do
-     sysctl_options = '^vm.swappiness \= 10$
+  describe file('/etc/sysctl.d/vm') do
+    sysctl_options = '^vm.swappiness \= 10$
 ^vm.dirty_expire_centisecs \= 3000$
 ^vm.dirty_ratio \= 12$
 ^vm.dirty_writeback_centisecs \= 500$
-^vm.dirty_background_ratio \= 3$
-^kernel.sem \= 500 256000 250 1024$
-^net.ipv4.ip_local_port_range \= 30000 65000$
-^net.ipv4.ip_forward \= 1$
-^net.bridge.bridge-nf-call-ip6tables \= 1$
+^vm.dirty_background_ratio \= 3$'
+    sysctl_options.split.each do |option|
+      its(:content) { should match Regexp.new(option) }
+    end
+  end
+
+  describe file('/etc/sysctl.d/semaphores') do
+    sysctl_options = '^kernel.sem \= 500 256000 250 1024$'
+    sysctl_options.split.each do |option|
+      its(:content) { should match Regexp.new(option) }
+    end
+  end
+
+  describe file('/etc/sysctl.d/bridge_iptables') do
+    sysctl_options = '^net.bridge.bridge-nf-call-ip6tables \= 1$
 ^net.bridge.bridge-nf-call-iptables \= 1$
 ^net.bridge.bridge-nf-call-arptables \= 1$'
-     sysctl_options.split.each do |option|
-       its(:content) { should match Regexp.new(option) }
-     end
+    sysctl_options.split.each do |option|
+      its(:content) { should match Regexp.new(option) }
+    end
+  end
+
+  describe file('/etc/sysctl.d/net') do
+    sysctl_options = 'net.ipv4.ip_local_port_range \= 30000 65000$
+^net.ipv4.ip_forward \= 1$'
+    sysctl_options.split.each do |option|
+      its(:content) { should match Regexp.new(option) }
+    end
   end
 end
 
