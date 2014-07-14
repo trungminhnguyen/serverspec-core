@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# keystone (openstack::keystone)
 describe package('openstack-keystone') do
   it { should be_installed.with_version('2012.2.4-3.el6.gdc1') }
 end
@@ -39,4 +40,6 @@ describe 'keystone APIs should listen on internal net only ' do
     end
 end
 
-
+describe cron do
+  it { should have_entry '0 2 * * * /usr/bin/keystone-manage token_flush &> /dev/null' }
+end
