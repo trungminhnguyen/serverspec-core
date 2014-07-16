@@ -1,5 +1,10 @@
 require 'spec_helper'
 
+# PCI-3980
+describe package('python-keystone') do
+  it { should be_installed.with_version('2012.2.4-3.el6.gdc1') }
+end
+
 # keystone (openstack::keystone)
 describe package('openstack-keystone') do
   it { should be_installed.with_version('2012.2.4-3.el6.gdc1') }
