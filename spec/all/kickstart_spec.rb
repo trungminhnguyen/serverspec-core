@@ -235,7 +235,7 @@ end
 
 # Networking
 
-describe host('mgmt-api01.na.getgooddata.com') do
+describe host('deploy.na.getgooddata.com') do
   # ping
    it { should be_reachable }
 end
