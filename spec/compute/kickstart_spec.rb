@@ -29,7 +29,6 @@ ftp
 hardlink
 iotop
 iptstate
-logwatch
 lsof
 man-pages
 mtr
