@@ -318,7 +318,7 @@ var formatResults = function(input) {
     var exampleIdentifier = function (e) {
         var matches = e.file_path.match(/^\.\/spec\/([^\/]+)\/([^\/]+)_spec\.rb$/);
         if (matches) {
-            return [ matches[1], matches[2], e.line_number ];
+            return [ matches[1], matches[2], e.line_number, e.full_description ];
         }
     };
 
