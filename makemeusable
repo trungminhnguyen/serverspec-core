@@ -1,0 +1,3 @@
+#!/bin/bash
+
+scl enable ruby193 'bundle install --binstubs; export PATH="./bin:$PATH"; bash'
