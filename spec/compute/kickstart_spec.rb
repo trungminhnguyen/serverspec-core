@@ -209,8 +209,17 @@ end
 disabled_services='rpcgssd
 cups
 autofs
-xinetd
-libvirt-guests'
+xinetd'
+
+describe service 'libvirt-guests' do
+  it { should_not be_enabled }
+end
+
+# Workaround of false positive on SL6.4 where status
+# returns exit code of 2 instead of 0
+describe command 'service libvirt-guests status' do
+  it { should return_stdout 'stopped, with no saved guests' }
+end
 
 describe service 'nfslock' do
   it { should_not be_enabled }
