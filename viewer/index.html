@@ -30,7 +30,7 @@
       <form role="form" ng-submit="load()">
           <div class="dropzone"
                ng-file-drop="onFileSelect($files)"
-               ng-show="dropSupported"
+               ng-if="dropSupported"
                ng-file-drop-available="dropSupported=true">
             <input type="text"
                    ng-model="url"
@@ -73,7 +73,7 @@
                       colspan="{{ role.tests }}">
                     {{ role.name }}
                   </td>
-                  <td ng-show="!roleset.roles.length">&nbsp;</td>
+                  <td ng-if="!roleset.roles.length">&nbsp;</td>
                 </tr>
                 <tr class="specs">
                   <td>&nbsp;</td>
@@ -81,7 +81,7 @@
                       colspan="{{ spec.tests }}">
                     {{ spec.name }}
                   </td>
-                  <td ng-show="!roleset.specs.length"
+                  <td ng-if="!roleset.specs.length"
                       colspan="10">
                     No tests available
                   </td>
@@ -93,11 +93,14 @@
                   <td ng-repeat="r in result.results"
                       class="test status-{{ r.test.status }}">
                     <span ng-click="details(result.name, r)"
-                          ng-show="r.test.full_description"
+                          ng-if="r.test.full_description && r.test.status == 'failed'"
+                          tooltip-placement="left"
+                          tooltip="{{ tooltip(r.test) }}">{{ mark(r.test.status) }}</span>
+                    <span ng-if="r.test.full_description && r.test.status != 'failed'"
                           tooltip-placement="left"
                           tooltip="{{ tooltip(r.test) }}">{{ mark(r.test.status) }}</span>
                   </td>
-                  <td ng-show="!result.results.length" class="test" style="border: none"><span>&nbsp;</span></td>
+                  <td ng-if="!result.results.length" class="test" style="border: none"><span>&nbsp;</span></td>
                 </tr>
               </table>
             </div>
@@ -123,7 +126,7 @@
             <dd>{{ description }}</dd>
           </dl>
           <prettyprint></prettyprint>
-          <div class="exception" ng-show="exception">
+          <div class="exception" ng-if="exception">
             <h4>{{ exception.class }}: {{ exception.message }}</h4>
             <span ng-repeat="line in exception.backtrace">{{ line }}</span>
           </div>
