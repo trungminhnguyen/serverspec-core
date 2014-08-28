@@ -20,6 +20,6 @@ describe "Only 2 devices shoud have IPs (lo, bond0)" do
 end
 
 describe command('ip -o -4 a show bond0') do
-  ip_match = '172.30.64.1(08|09|10|11|12)\/18 brd 172.30.127.255'
+  ip_match = '172.30.64.1(08|09|10|11|12)\/24 brd 172.30.64.255'
   its(:stdout) { should match Regexp.new(ip_match) }
 end
