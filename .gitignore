@@ -5,3 +5,5 @@ bundle/
 .bundle/
 #ignore binstubs
 bin/
+#vagrant boxes
+viewer/*.box
