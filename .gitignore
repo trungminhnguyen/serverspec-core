@@ -3,3 +3,5 @@ Gemfile.local
 /reports/
 bundle/
 .bundle/
+#ignore binstubs
+bin/
