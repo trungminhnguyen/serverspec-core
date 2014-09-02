@@ -1,11 +1,11 @@
 "use strict";
 
-var reportResultsApp = angular.module("reportResultsApp", ['ngRoute', 'angularFileUpload', 'ui.bootstrap']);
+var reportResultsApp = angular.module("reportResultsApp", ['ngRoute', 'ui.bootstrap']);
 
 reportResultsApp.config([ "$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(false);
     $routeProvider.
-        when("/upload", {
+        when("/", {
             templateUrl: "upload.html",
             controller: "uploadCtrl",
             resolve: {
@@ -48,7 +48,7 @@ reportResultsApp.config([ "$routeProvider", "$locationProvider", function($route
         }).
 
         otherwise({
-            redirectTo: "/upload"
+            redirectTo: "/"
         });
 }]);
 
@@ -99,20 +99,6 @@ reportResultsApp.controller("uploadCtrl", [ "$scope", "$location", "ResultData",
     $scope.files = files;
     $scope.visit = function(file) {
         $location.path("/url/" + file);
-    };
-
-    // Upload a file
-    $scope.onFileSelect = function($files) {
-        var reader = new FileReader();
-        var file = $files[0];
-        reader.addEventListener("loadend", function() {
-            $scope.$apply(function(scope) {
-                var input = JSON.parse(reader.result);
-                ResultData.save(input);
-                $location.path("/file/" + file.name);
-            });
-        });
-        reader.readAsBinaryString($files[0]);
     };
 
     // Load an URL

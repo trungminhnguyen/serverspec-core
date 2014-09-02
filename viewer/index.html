@@ -25,25 +25,7 @@
 
 
     <script type="text/ng-template" id="upload.html">
-    <!-- When we don't have any results, display file uploader -->
-    <div class="container">
-      <form role="form" ng-submit="load()">
-          <div class="dropzone"
-               ng-file-drop="onFileSelect($files)"
-               ng-show="dropSupported"
-               ng-file-drop-available="dropSupported=true">
-            <input type="text"
-                   ng-model="url"
-                   placeholder="Enter an URL"
-                   required>
-            <blockquote><p>Or drop me your JSON file!</p></blockquote>
-            <input type="file"
-                   placeholder="JSON file"
-                   ng-file-select="onFileSelect($files)"
-                   autofocus>
-          </div>
-      </form>
-    </div>
+    <h1 align='center'>ServerSpec reports</h1>
     <div class="browser">
       <ul>
         <li ng-repeat="file in files | limitTo:100">
