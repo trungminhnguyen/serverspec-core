@@ -74,6 +74,7 @@ input[type=file] {
     padding: 0 1em;
     min-height: 1.5em;
     text-align: right;
+    white-space: nowrap;
 }
 .results .rolesets td {
     font-weight: bold;
