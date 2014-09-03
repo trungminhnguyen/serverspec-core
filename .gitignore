@@ -3,3 +3,4 @@ Gemfile.local
 /reports/
 bundle/
 .bundle/
+node_modules
