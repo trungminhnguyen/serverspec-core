@@ -4,3 +4,7 @@ Gemfile.local
 bundle/
 .bundle/
 node_modules
+#ignore binstubs
+bin/
+#vagrant boxes
+viewer/*.box
