@@ -198,3 +198,31 @@ dd.status-passed {
     display: inline-block;
     vertical-align: top;
 }
+
+.pln {
+  display: inline !important;
+}
+
+.pun {
+  display: inline !important;
+}
+
+.str {
+  display: inline !important;
+}
+
+.kwd {
+  display: inline !important;
+}
+
+.lit {
+  display: inline !important;
+}
+
+.com {
+  display: inline !important;
+}
+
+.typ {
+  display: inline !important;
+}
