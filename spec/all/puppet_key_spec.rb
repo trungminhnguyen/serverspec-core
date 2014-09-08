@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe file('/root/.ssh/puppet_master') do
-  it { should match_sha256checksum 'a02a687d704b1ec0fa47fc0b09533ab2d4498291282a3374944f8a7f8c2f809c' }
+  it { should match_sha256checksum '89fc621505e844b99bfb14f7856b1119bee61dbbec202e346c78a160dda65482' }
 end
 
 # connecting to github
