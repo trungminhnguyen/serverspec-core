@@ -6,5 +6,5 @@ bundle/
 node_modules
 #ignore binstubs
 bin/
-#vagrant boxes
-viewer/*.box
+#random files put to serve via http
+public/misc
