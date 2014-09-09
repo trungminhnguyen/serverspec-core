@@ -4,9 +4,12 @@ require 'rspec/core/rake_task'
 require 'colorize'
 require 'json'
 require 'yaml'
+require 'net/http'
+require 'uri'
 
-@hosts    = './hosts.yml'           # List of all hosts
+@hosts    = './hosts.yml'        # List of all hosts
 @@reports  = './reports'         # Where to store JSON reports
+@port = '8000'                   # nodejs port to trigger report precaching
 
 # Special version of RakeTask for serverspec which comes with better
 # reporting
@@ -143,6 +146,14 @@ namespace :reports do
                     tests: tests,
                     sources: sources }
       f.puts JSON.generate(json_hash)
+      puts "Triggering report precache..."
+      uri = URI.parse "http://localhost:#{@port}/#{File.basename(fname)}"
+      begin
+        response = Net::HTTP.get_response(uri).code
+      rescue
+        puts "Can't connect to nodejs ui server - report was created but not precached"
+      end
+      puts "All is cool" if response == "200"
     end
   end
 end
