@@ -9,7 +9,6 @@ require 'uri'
 
 @hosts    = './hosts.yml'        # List of all hosts
 @@reports  = './reports'         # Where to store JSON reports
-@port = `hiera -c /etc/puppet/hiera.yaml serverspec::nodejs_port` # nodejs port to trigger report precaching
 
 # Special version of RakeTask for serverspec which comes with better
 # reporting
@@ -147,7 +146,7 @@ namespace :reports do
                     sources: sources }
       f.puts JSON.generate(json_hash)
       puts "Triggering report precache..."
-      uri = URI.parse "http://localhost:#{@port}/#{File.basename(fname)}"
+      uri = URI.parse "http://localhost/#{File.basename(fname)}"
       begin
         response = Net::HTTP.get_response(uri).code
       rescue
