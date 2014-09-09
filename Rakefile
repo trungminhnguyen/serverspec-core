@@ -9,7 +9,7 @@ require 'uri'
 
 @hosts    = './hosts.yml'        # List of all hosts
 @@reports  = './reports'         # Where to store JSON reports
-@port = '8000'                   # nodejs port to trigger report precaching
+@port = `hiera -c /etc/puppet/hiera.yaml serverspec::nodejs_port` # nodejs port to trigger report precaching
 
 # Special version of RakeTask for serverspec which comes with better
 # reporting
