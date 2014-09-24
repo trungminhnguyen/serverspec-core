@@ -6,3 +6,12 @@ describe command('omreport storage vdisk') do
  it { should return_stdout /^Write Policy\s+: Write Back$/ }
  it { should return_stdout /^Stripe Element Size\s+: 64 KB$/ }
 end
+
+# 24 disks = 23 + 1 hot spare
+describe command('omreport storage pdisk controller=0|grep "Hot Spare.*: No"|wc -l') do
+  it { should return_stdout '23' }
+end
+
+describe command('omreport storage pdisk controller=0|grep "Hot Spare.*: Dedicated"|wc -l') do
+  it { should return_stdout '1' }
+end
