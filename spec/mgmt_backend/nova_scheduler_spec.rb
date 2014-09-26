@@ -2,7 +2,7 @@ require 'spec_helper'
 
 # openstack-nova-scheduler (openstack::nova_scheduler)
 describe package('openstack-nova-scheduler') do
-  it { should be_installed.with_version('2012.2.4-32.el6.gdc') }
+  it { should be_installed.with_version('2012.2.4-35.el6.gdc') }
 end
 
 describe service('openstack-nova-scheduler') do
