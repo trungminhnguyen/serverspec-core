@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe command('ip route show table 111 | sort') do
-    table = %q{108.171.171.224 dev bond0.279  scope link 
+    table = %q{104.130.85.216 dev bond0.279  scope link 
+104.130.85.219 dev bond0.279  scope link 
+108.166.27.84 dev bond0.279  scope link 
+108.166.27.85 dev bond0.279  scope link 
+108.166.27.86 dev bond0.279  scope link 
+108.166.27.87 dev bond0.279  scope link 
+108.171.171.224 dev bond0.279  scope link 
 108.171.171.225 dev bond0.279  scope link 
 108.171.171.226 dev bond0.279  scope link 
 108.171.171.227 dev bond0.279  scope link 
@@ -39,6 +45,7 @@ describe command('ip route show table 111 | sort') do
 162.242.190.28 dev bond0.279  scope link 
 162.242.190.29 dev bond0.279  scope link 
 162.242.190.30 dev bond0.279  scope link 
+162.242.190.31 dev bond0.279  scope link 
 166.78.217.0 dev bond0.279  scope link 
 166.78.217.1 dev bond0.279  scope link 
 166.78.217.2 dev bond0.279  scope link 
@@ -77,6 +84,7 @@ describe command('ip route show table 111 | sort') do
 192.237.146.236 dev bond0.279  scope link 
 192.237.146.237 dev bond0.279  scope link 
 192.237.146.238 dev bond0.279  scope link 
+192.237.146.239 dev bond0.279  scope link 
 192.237.146.240 dev bond0.279  scope link 
 192.237.146.241 dev bond0.279  scope link 
 192.237.146.242 dev bond0.279  scope link 
@@ -93,6 +101,9 @@ describe command('ip route show table 111 | sort') do
 192.237.146.253 dev bond0.279  scope link 
 192.237.146.254 dev bond0.279  scope link 
 192.237.146.255 dev bond0.279  scope link 
+23.253.25.10 dev bond0.279  scope link 
+23.253.25.8 dev bond0.279  scope link 
+23.253.25.9 dev bond0.279  scope link 
 23.253.9.192 dev bond0.279  scope link 
 23.253.9.193 dev bond0.279  scope link 
 23.253.9.194 dev bond0.279  scope link 
@@ -106,9 +117,6 @@ describe command('ip route show table 111 | sort') do
 23.253.9.202 dev bond0.279  scope link 
 23.253.9.203 dev bond0.279  scope link 
 23.253.9.204 dev bond0.279  scope link 
-23.253.25.10 dev bond0.279  scope link 
-23.253.25.8 dev bond0.279  scope link 
-23.253.25.9 dev bond0.279  scope link 
 23.253.9.205 dev bond0.279  scope link 
 23.253.9.206 dev bond0.279  scope link 
 23.253.9.207 dev bond0.279  scope link 
@@ -160,14 +168,6 @@ describe command('ip route show table 111 | sort') do
 50.56.43.221 dev bond0.279  scope link 
 50.56.43.222 dev bond0.279  scope link 
 50.56.43.223 dev bond0.279  scope link 
-104.130.85.216 dev bond0.279  scope link 
-104.130.85.219 dev bond0.279  scope link 
-108.166.27.84 dev bond0.279  scope link 
-108.166.27.85 dev bond0.279  scope link 
-108.166.27.86 dev bond0.279  scope link 
-108.166.27.87 dev bond0.279  scope link 
-162.242.190.31 dev bond0.279  scope link 
-192.237.146.239 dev bond0.279  scope link 
 }
     its(:stdout) { should eq table }
 end
