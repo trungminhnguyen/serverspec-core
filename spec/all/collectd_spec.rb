@@ -32,3 +32,9 @@ describe "PCI-3977" do
     its(:content) { should match Regexp.new(common) }
   end
 end
+
+describe "PCI-3832" do
+  describe command('rpm -q --queryformat "%{version}-%{release}" collectd') do
+    its(:stdout) { should eq '5.4.1-7.gdc.el6' }
+  end
+end
