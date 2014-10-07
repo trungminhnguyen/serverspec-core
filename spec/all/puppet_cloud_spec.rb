@@ -20,3 +20,7 @@ describe file('/etc/puppet/puppet.conf') do
   it {should_not contain 'modulepath'}
   it {should_not contain 'manifest'}
 end
+
+describe command('rpm -q --queryformat "%{version}-%{release}" oam-puppet-cloud') do
+  its(:stdout) { should eq '1.0-6' }
+end
