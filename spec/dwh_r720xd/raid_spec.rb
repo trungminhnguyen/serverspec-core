@@ -9,7 +9,11 @@ end
 
 # 24 disks = 23 + 1 hot spare
 describe command('omreport storage pdisk controller=0|grep "Hot Spare.*: No"|wc -l') do
-  it { should return_stdout '23' }
+  if command("omreport storage pdisk controller=0|awk '/Media/ {print $3}'|uniq").stdout.chomp == 'SSD'
+    it { should return_stdout '11' }
+  else
+    it { should return_stdout '23' }
+  end
 end
 
 describe command('omreport storage pdisk controller=0|grep "Hot Spare.*: Dedicated"|wc -l') do
