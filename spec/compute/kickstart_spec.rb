@@ -176,7 +176,6 @@ end
 os = backend(Serverspec::Commands::Base).check_os
 repos = "epel
 gdc
-3rdparty
 sl"
 
 repos.split.each do |repo|
