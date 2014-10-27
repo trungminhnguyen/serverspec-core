@@ -145,6 +145,7 @@ namespace :reports do
                     tests: tests,
                     sources: sources }
       f.puts JSON.generate(json_hash)
+      f.close
       puts "Triggering report precache..."
       uri = URI.parse "http://localhost/#{File.basename(fname)}"
       begin
