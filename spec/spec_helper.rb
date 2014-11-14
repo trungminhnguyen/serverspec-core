@@ -19,3 +19,5 @@ RSpec.configure do |c|
   tags = (ENV['TARGET_TAGS'] || '').split(',')
   c.filter_run_excluding tag: ->(t) { !tags.include?(t) }
 end
+
+os = backend(Serverspec::Commands::Base).check_os

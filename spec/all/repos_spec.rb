@@ -10,8 +10,8 @@ describe command("yum repolist enabled --verbose| grep baseurl | sort | grep -v 
   its(:stdout) { should eq "Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/cure-puppet
 Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/epel/6/x86_64
 Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/gdc_tools/centos/6/x86_64
-Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/sl/6.5/x86_64/os
-Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/sl/6.5/x86_64/security
+Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/sl/#{os[:release]}/x86_64/os
+Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/sl/#{os[:release]}/x86_64/security
 " }
 end
 

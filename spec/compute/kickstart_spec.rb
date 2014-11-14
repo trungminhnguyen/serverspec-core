@@ -173,7 +173,6 @@ end
 
 # Repos
 
-os = backend(Serverspec::Commands::Base).check_os
 repos = "epel
 gdc
 sl"
