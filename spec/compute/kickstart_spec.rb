@@ -122,7 +122,6 @@ sg3_utils
 sdparm
 lsscsi
 spice-server
-monit
 virt-top
 tunctl
 htop
@@ -191,7 +190,6 @@ ntpd
 ntpdate
 rsyslog
 restorecond
-monit
 libvirtd
 netfs
 rpcbind
