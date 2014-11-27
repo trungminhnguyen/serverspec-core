@@ -13,9 +13,7 @@ describe file('/etc/monit.d/ntpd.conf') do
   it { should be_file }
   ntpd_conf  = %q{check process ntpd
     pidfile /var/run/ntpd.pid
-    start program = "/etc/init.d/ntpd start"
-    stop  program = "/etc/init.d/ntpd stop"
-    group system
+    mode passive
 }
   its(:content) { should eq ntpd_conf }
 end
