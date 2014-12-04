@@ -59,7 +59,15 @@ describe 'dnsmasq' do
     it { should be_enabled }
   end
 
-  # TODO test if it resolves
+  # test if it resolves on PXE
+  describe command('dig deploy.na.getgooddata.com @172.30.190.180 +short') do
+    it {should return_stdout /\d+\.\d+\.\d+\.\d+/}
+  end
+
+  # test if it resolves on IntNet
+  describe command('dig deploy.na.getgooddata.com @172.30.128.180 +short') do
+    it {should return_stdout /\d+\.\d+\.\d+\.\d+/}
+  end
 
 end
 
