@@ -25,7 +25,8 @@ known_good_kernels = [
 '3.12.22',
 '3.12.22',
 '3.12.23',
-'3.12.27']
+'3.12.27',
+'3.12.33']
 
 describe "safe kernel verion" do
   it "should be installed" do
