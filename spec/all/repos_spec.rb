@@ -8,9 +8,9 @@ disabled_repos = 'tools/testing' # the ones we check for url but they should be 
 
 describe command("yum repolist enabled --verbose| grep baseurl | sort | grep -v '#{excluded_repos}' | sed 's:/$::g'") do
   its(:stdout) { should eq "Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/cure-puppet
-Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/epel/6/x86_64
-Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/sl/#{os[:release]}/x86_64/os
-Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/sl/#{os[:release]}/x86_64/security
+Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/scientific/#{os[:release]}/develop/x86_64/security
+Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/scientific/#{os[:release]}/x86_64/os
+Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/scientific/epel/develop/6/x86_64
 Repo-baseurl : http://mgmt-repo02.int.na.getgooddata.com:8080/pulp/repos/tools/develop/centos/6/x86_64
 " }
 end
