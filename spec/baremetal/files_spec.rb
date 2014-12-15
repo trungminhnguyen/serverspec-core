@@ -24,10 +24,6 @@ require 'spec_helper'
   end
 end
 
-describe file('/etc/opt/gdc/cred/ic2.url') do
-  its(:content) { should eq "https://<user>:<password>@ic2-api.gooddata.com\n"}
-end
-
 describe file('/etc/opt/cloud/backup-ng.key') do
   its(:content) { should eq '' }
 end
