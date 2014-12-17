@@ -192,8 +192,7 @@ rsyslog
 restorecond
 libvirtd
 netfs
-rpcbind
-rpcidmapd'
+rpcbind'
 
 enabled_services.split.each do |service|
   describe service(service) do
