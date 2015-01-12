@@ -19,6 +19,7 @@ end
 describe file('/etc/puppet/puppet.conf') do
   it {should_not contain 'modulepath'}
   it {should_not contain 'manifest'}
+  it { should contain 'environmentpath = $confdir/environments/' }
 end
 
 describe command('rpm -q --queryformat "%{version}-%{release}" oam-puppet-cloud') do
