@@ -6,8 +6,14 @@ require 'json'
 require 'yaml'
 require 'net/http'
 require 'uri'
+require 'socket'
 
-@hosts    = './hosts.yml'        # List of all hosts
+conf_dir = './cfg/'
+env = Socket.gethostname.split('.')[1] # Decide env according to fqdn
+env = 'na1' if env == 'na' # Our funny deviation
+config = YAML.load_file "#{conf_dir}/serverspec.yml" # Main configuration file
+@hosts = conf_dir + config[env][:hosts]        # List of all hosts
+@suites = config[env][:suites] # Test suites to use for env
 @@reports  = './reports'         # Where to store JSON reports
 
 # Special version of RakeTask for serverspec which comes with better
@@ -58,7 +64,7 @@ namespace :check do
         dirs = ['all'] + host[:roles] + [hostname]
         t.target = hostname
         t.tags = host[:tags]
-        t.pattern = './spec/{' + dirs.join(',') + '}/*_spec.rb'
+        t.pattern = './spec/{' + @suites.join(',') + '}/{' + dirs.join(',') + '}/*_spec.rb'
       end
     end
   end
