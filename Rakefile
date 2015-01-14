@@ -6,11 +6,10 @@ require 'json'
 require 'yaml'
 require 'net/http'
 require 'uri'
-require 'socket'
+require 'parseconfig'
 
 conf_dir = './cfg/'
-env = Socket.gethostname.split('.')[1] # Decide env according to fqdn
-env = 'na1' if env == 'na' # Our funny deviation
+env = ParseConfig.new('/etc/puppet/puppet.conf')['main']['environment']  # Env is inherited from puppet config
 config = YAML.load_file "#{conf_dir}/serverspec.yml" # Main configuration file
 @hosts = conf_dir + config[env][:hosts]        # List of all hosts
 @suites = config[env][:suites] # Test suites to use for env
