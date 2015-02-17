@@ -4,7 +4,10 @@ require 'pathname'
 require 'net/ssh'
 require 'rspec/its'
 
-Dir["./spec/*/shared_helper.rb"].sort.each { |f| require f}
+# Include shared examples
+Dir["./spec/*/shared_helper.rb"].sort.each { |f| require f }
+# Include custom resource types
+Dir["./spec/types/*.rb"].sort.each { |f| require f }
 
 include Serverspec::Helper::Ssh
 include Serverspec::Helper::DetectOS
