@@ -38,5 +38,3 @@ module Serverspec
 
   end
 end
-
-include Serverspec::Type
