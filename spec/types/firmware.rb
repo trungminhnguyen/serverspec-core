@@ -20,11 +20,11 @@ module Serverspec
       end
 
       def nics
-        active_nics = backend.run_command("omreport chassis nics |grep -B 4 'Connection Status : Connected'|awk '/Index/ {print $3}'")
+        active_nics = @runner.run_command("omreport chassis nics |grep -B 4 'Connection Status : Connected'|awk '/Index/ {print $3}'")
         active_nics = active_nics.stdout.split
         nic_versions = []
         active_nics.each do |index|
-          version = backend.run_command("omreport chassis nics index=#{index} | grep Firmware -A1 | tail -1 ")
+          version = @runner.run_command("omreport chassis nics index=#{index} | grep Firmware -A1 | tail -1 ")
           nic_versions << version.stdout.chomp
         end
         nic_versions
@@ -33,7 +33,7 @@ module Serverspec
       private
 
       def version_fetch(thing)
-        ret = backend.run_command "omreport system version | grep '#{thing}' -A1|tail -1 | awk '{print $3}'"
+        ret = @runner.run_command "omreport system version | grep '#{thing}' -A1|tail -1 | awk '{print $3}'"
         ret.stdout.chomp
       end
 

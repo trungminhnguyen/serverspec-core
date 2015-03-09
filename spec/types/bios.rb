@@ -26,7 +26,7 @@ module Serverspec
       private
 
       def ret
-        ret = backend.run_command('/opt/cloud/bin/check_bios.sh -r')
+        ret = @runner.run_command('/opt/cloud/bin/check_bios.sh -r')
         ret = ret.stdout.chomp
       end
 
