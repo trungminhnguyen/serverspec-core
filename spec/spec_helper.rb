@@ -10,20 +10,18 @@ Dir["./spec/*/shared_helper.rb"].sort.each { |f| require f }
 Dir["./spec/types/*.rb"].sort.each { |f| require f }
 include Serverspec::Type
 
-include Serverspec::Helper::Ssh
-include Serverspec::Helper::DetectOS
+set :backend, :ssh
+set :ssh_options, :user => 'root'
 
 RSpec.configure do |c|
+  c.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
   c.disable_sudo = true
   c.path  = '/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin'
   c.host  = ENV['TARGET_HOST']
   options = Net::SSH::Config.for(c.host)
-  user    = options[:user] || Etc.getlogin
-  c.ssh   = Net::SSH.start(c.host, user, options)
-  c.os    = backend.check_os
 
   tags = (ENV['TARGET_TAGS'] || '').split(',')
   c.filter_run_excluding tag: ->(t) { !tags.include?(t) }
 end
-
-os = backend(Serverspec::Commands::Base).check_os
