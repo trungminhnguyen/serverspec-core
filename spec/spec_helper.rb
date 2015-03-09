@@ -12,13 +12,13 @@ include Serverspec::Type
 
 set :backend, :ssh
 set :ssh_options, :user => 'root'
+set :path, '$PATH:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin'
 
 RSpec.configure do |c|
   c.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
   end
   c.disable_sudo = true
-  c.path  = '/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin'
   c.host  = ENV['TARGET_HOST']
   options = Net::SSH::Config.for(c.host)
 
