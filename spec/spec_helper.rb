@@ -10,7 +10,8 @@ Dir["./spec/*/shared_helper.rb"].sort.each { |f| require f }
 Dir["./spec/types/*.rb"].sort.each { |f| require f }
 include Serverspec::Type
 
-set :backend, :ssh
+backend = ENV['SERVERSPEC_BACKEND'] || :ssh
+set :backend, backend
 set :ssh_options, :user => 'root'
 set :path, '$PATH:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin'
 

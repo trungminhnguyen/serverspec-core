@@ -9,7 +9,9 @@ require 'uri'
 require 'parseconfig'
 
 conf_dir = './cfg/'
-env = ParseConfig.new('/etc/puppet/puppet.conf')['main']['environment']  # Env is inherited from puppet config
+# Env is inherited from puppet config or overrided by env variable
+env = ENV['SERVERSPEC_ENV'] ||
+      ParseConfig.new('/etc/puppet/puppet.conf')['main']['environment']
 config = YAML.load_file "#{conf_dir}/serverspec.yml" # Main configuration file
 @hosts = conf_dir + config[env][:hosts]        # List of all hosts
 @suites = config[env][:suites] # Test suites to use for env
