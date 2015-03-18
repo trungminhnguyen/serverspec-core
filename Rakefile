@@ -16,6 +16,7 @@ config = YAML.load_file "#{conf_dir}/serverspec.yml" # Main configuration file
 @hosts = conf_dir + config[env][:hosts]        # List of all hosts
 @suites = config[env][:suites] # Test suites to use for env
 @@reports  = './reports'         # Where to store JSON reports
+@@exit_status = 0 # Overall test run exist status
 
 # Special version of RakeTask for serverspec which comes with better
 # reporting
@@ -26,7 +27,12 @@ class ServerspecTask < RSpec::Core::RakeTask
   # Run our serverspec task. Errors are ignored.
   def run_task(verbose)
     json = "#{@@reports}/current/#{target}.json"
-    @rspec_opts = ['-c', '--format', 'json', '--out', json]
+    @rspec_opts = ['--format', 'json', '--out', json]
+    if ENV['SERVERSPEC_BACKEND'] == 'exec'
+      @rspec_opts += ['--format', 'progress']
+    else
+      @rspec_opts += ['-c']
+    end
     system("env TARGET_HOST=#{target} TARGET_TAGS=#{(tags || [])
            .join(',')} #{spec_command}")
     status(target, json) if verbose
@@ -40,11 +46,13 @@ class ServerspecTask < RSpec::Core::RakeTask
     failures = summary['failure_count']
     if failures > 0
       print format('[%-3s/%-4s] ', failures, total).yellow, target, "\n"
+      @@exit_status = 1
     else
       print '[OK      ] '.green, target, "\n"
     end
     rescue => e
       print '[ERROR   ] '.red, target, " (#{e.message})", "\n"
+      @@exit_status = 1
   end
 end
 
@@ -153,14 +161,13 @@ namespace :reports do
                     sources: sources }
       f.puts JSON.generate(json_hash)
       f.close
-      puts "Triggering report precache..."
       uri = URI.parse "http://localhost/#{File.basename(fname)}"
+      # Report precache
       begin
         response = Net::HTTP.get_response(uri).code
       rescue
-        puts "Can't connect to nodejs ui server - report was created but not precached"
       end
-      puts "All is cool" if response == "200"
+      exit @@exit_status
     end
   end
 end
