@@ -7,13 +7,12 @@ require 'yaml'
 require 'net/http'
 require 'uri'
 require 'parseconfig'
+require './cfg/cfg_helper'
 
 conf_dir = './cfg/'
 # Env is inherited from puppet config or overrided by env variable
-env = ENV['SERVERSPEC_ENV'] ||
-      ParseConfig.new('/etc/puppet/puppet.conf')['main']['environment']
-config = YAML.load_file "#{conf_dir}/serverspec.yml" # Main configuration file
-@hosts = conf_dir + config[env][:hosts]        # List of all hosts
+env = get_environment
+config = get_main_config(conf_dir)
 @suites = config[env][:suites] # Test suites to use for env
 @@reports  = './reports'         # Where to store JSON reports
 @@exit_status = 0 # Overall test run exist status
@@ -56,7 +55,7 @@ class ServerspecTask < RSpec::Core::RakeTask
   end
 end
 
-hosts = YAML.load_file(ENV['HOSTS'] || @hosts)
+hosts = get_all_hosts(conf_dir)
 
 desc 'Run serverspec to all hosts'
 task spec: 'check:server:all'
