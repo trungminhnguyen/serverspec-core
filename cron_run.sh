@@ -1,6 +1,8 @@
 #!/bin/bash
 
-scl enable ruby193 'bundle exec rake spec' &> ./cron_run.log
+fqdn=`hostname -f`
+
+scl enable ruby193 "bundle exec rake check:server:$fqdn" &> ./cron_run.log
 
 if [ $? -ne 0 ];then
   cat ./cron_run.log

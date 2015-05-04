@@ -65,6 +65,11 @@ namespace :check do
   # Per server tasks
   namespace :server do
     desc 'Run serverspec to all hosts'
+    unless ENV['SERVERSPEC_BACKEND'] == 'exec'
+      hosts.delete_if do |hostname, host|
+        host[:tags] and host[:tags].include? 'localhost_only'
+      end
+    end
     task all: hosts.keys.map { |h| h }
     hosts.each do |hostname, host|
       desc "Run serverspec to host #{hostname}"
