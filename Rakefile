@@ -47,7 +47,7 @@ class ServerspecTask < RSpec::Core::RakeTask
       print format('[%-3s/%-4s] ', failures, total).yellow, target, "\n"
       @@exit_status = 1
     else
-      print '[OK      ] '.green, target, "\n"
+      print "[OK /#{total} ] ".green, target, "\n"
     end
     rescue => e
       print '[ERROR   ] '.red, target, " (#{e.message})", "\n"
