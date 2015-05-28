@@ -6,10 +6,11 @@ gem "colorize"
 gem "parseconfig"
 
 group :cista do
-    gem 'jira-ruby', require: 'jira'
+  gem 'jira-ruby', require: 'jira'
+  gem 'confluence-client'
 end
 
 group :development do
- gem 'pry'
- gem 'rubocop', require: :false
+  gem 'pry'
+  gem 'rubocop', require: :false
 end
