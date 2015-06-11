@@ -12,6 +12,7 @@ require './cfg/cfg_helper'
 conf_dir = './cfg/'
 # Env is inherited from puppet config or overrided by env variable
 env = get_environment
+raise "Environment is not detected, try to set SERVERSPEC_ENV variable..." if env.nil?
 config = get_main_config(conf_dir)
 @suites = config[env][:suites] # Test suites to use for env
 @@reports  = './reports'         # Where to store JSON reports
