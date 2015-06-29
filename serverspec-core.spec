@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.0
-Release:          2.gdc
+Release:          3.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -26,6 +26,8 @@ Requires:         ruby193-rubygem-parseconfig
 rm -fr $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{install_dir}
 cp -a * $RPM_BUILD_ROOT%{install_dir}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/
+mv $RPM_BUILD_ROOT%{install_dir}/serverspec.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/serverspec
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -45,13 +47,18 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %{install_dir}/serverspec-core.spec
 %attr(0755, root, root) %{install_dir}/spec/spec_helper.rb
 %attr(0755, root, root) %doc %{install_dir}/*.md
+%attr(0644, root, root) %config(noreplace) %{_sysconfdir}/sysconfig/serverspec
 %exclude %{install_dir}/Gemfile*
 %exclude %{install_dir}/Makefile
 %exclude %{install_dir}/makemeusable
 
 
 %changelog
+* Mon Jun 29 2015 Radek Smidl <radek.smidl@gooddata.com> 1.0-3.gdc
+- sysconfig support added
+
 * Wed Jun 10 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.0-2.gdc
 - Fix versioning and file inclusion
+
 * Tue Jun 09 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-1.gdc
 - Initial rpmbuild

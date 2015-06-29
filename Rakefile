@@ -15,7 +15,7 @@ env = get_environment
 raise "Environment is not detected, try to set SERVERSPEC_ENV variable..." if env.nil?
 config = get_main_config(conf_dir)
 @suites = config[env][:suites] # Test suites to use for env
-@@reports  = './reports'         # Where to store JSON reports
+@@reports = get_reports_path # Where to store JSON reports
 @@exit_status = 0 # Overall test run exist status
 
 # Special version of RakeTask for serverspec which comes with better
