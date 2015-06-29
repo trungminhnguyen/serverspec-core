@@ -2,4 +2,4 @@
 
 CONF_DIR=/etc/serverspec/cfg
 SPEC_DIR=/etc/puppet/spec
-REPORTS_PATH=/opt/gdc/serverspec-core/reports
+REPORTS_DIR=/opt/gdc/serverspec-core/reports

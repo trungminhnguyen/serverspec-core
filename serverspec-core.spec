@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.0
-Release:          4.gdc
+Release:          5.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -54,6 +54,9 @@ GoodData ServerSpec integration - core package
 
 
 %changelog
+* Mon Jun 29 2015 Radek Smidl <radek.smidl@gooddata.com> 1.0-5.gdc
+- REPORTS_PATH renamed to REPORTS_DIR
+
 * Mon Jun 29 2015 Radek Smidl <radek.smidl@gooddata.com> 1.0-4.gdc
 - CONF_DIR and SPEC_DIR options added
 
