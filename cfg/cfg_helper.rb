@@ -15,3 +15,10 @@ def get_all_hosts(conf_dir='./cfg/')
   @hosts = conf_dir + config[env][:hosts]
   return YAML.load_file(ENV['HOSTS'] || @hosts)
 end
+
+def get_reports_path
+  sysconfig_file = '/etc/sysconfig/serverspec'
+  return ENV['REPORTS_PATH'] ||
+    (ParseConfig.new(sysconfig_file)['REPORTS_PATH'] if File.readable?(sysconfig_file)) ||
+    './reports'
+end
