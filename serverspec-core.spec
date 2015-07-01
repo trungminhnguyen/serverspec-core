@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.0
-Release:          5.gdc
+Release:          6.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -54,6 +54,9 @@ GoodData ServerSpec integration - core package
 
 
 %changelog
+* Wed Jul 01 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-6.gdc
+- cron should not exec bundle anymore
+
 * Mon Jun 29 2015 Radek Smidl <radek.smidl@gooddata.com> 1.0-5.gdc
 - REPORTS_PATH renamed to REPORTS_DIR
 
