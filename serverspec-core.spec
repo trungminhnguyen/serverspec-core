@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.0
-Release:          8.gdc
+Release:          9.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -54,6 +54,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/reports/.gitignore
 
 %changelog
+* Thu Jul 02 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-9.gdc
+- default spec_helper provides SPEC_DIR to all included specs and helpers
+
 * Thu Jul 02 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-8.gdc
 - exclude reports/.gitignore
 
