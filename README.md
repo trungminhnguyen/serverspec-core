@@ -70,6 +70,26 @@ tests. You can do something like this with them:
 This test will only be executed if `eu` is one of the tags of the
 current host.
 
+Helpers
+-------
+
+When it comes to run tests, the default `spec_helper` is used to "run tests", it
+is possible to create custom helpers. This allows possibility to extend your
+specs with custom helpers - eg. common functions.
+
+Default `spec_helper` parse all helpers with path `SPEC_DIR/*/*_helper.rb`.
+
+Types
+-----
+
+It is possible to build custom [Resource types][rtypes], they should be placed
+in `spec/types/directory`.
+
+It is also possible to create custom helper which will include custom types from
+any other location.
+
+[rtypes]: http://serverspec.org/resource_types.html
+
 Parallel execution
 ------------------
 
