@@ -2,7 +2,7 @@
 
 fqdn=`hostname -f`
 
-scl enable ruby193 "bundle exec rake check:server:$fqdn" &> ./cron_run.log
+scl enable ruby193 "rake check:server:$fqdn" &> ./cron_run.log
 
 if [ $? -ne 0 ];then
   cat ./cron_run.log
