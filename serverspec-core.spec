@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.0
-Release:          6.gdc
+Release:          7.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -40,7 +40,6 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %dir %{install_dir}/cfg
 %attr(0755, root, root) %dir %{install_dir}/spec
 %attr(0755, root, root) %dir %{install_dir}/reports
-%attr(0755, root, root) %{install_dir}/spec/types
 %attr(0755, root, root) %{install_dir}/cfg/cfg_helper.rb
 %attr(0755, root, root) %{install_dir}/check_last_run.sh
 %attr(0755, root, root) %{install_dir}/cron_run.sh
@@ -57,6 +56,7 @@ GoodData ServerSpec integration - core package
 %changelog
 * Thu Jul 02 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-7.gdc
 - create default reports directory while installing package
+- do not include types in package - they should be delivered with specs
 
 * Wed Jul 01 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-6.gdc
 - cron should not exec bundle anymore
