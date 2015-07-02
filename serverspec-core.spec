@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.0
-Release:          7.gdc
+Release:          8.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -51,9 +51,12 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/Gemfile*
 %exclude %{install_dir}/Makefile
 %exclude %{install_dir}/makemeusable
-
+%exclude %{install_dir}/reports/.gitignore
 
 %changelog
+* Thu Jul 02 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-8.gdc
+- exclude reports/.gitignore
+
 * Thu Jul 02 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-7.gdc
 - create default reports directory while installing package
 - do not include types in package - they should be delivered with specs
