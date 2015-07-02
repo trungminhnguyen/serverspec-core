@@ -40,6 +40,7 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %dir %{install_dir}/cfg
 %attr(0755, root, root) %dir %{install_dir}/spec
 %attr(0755, root, root) %dir %{install_dir}/reports
+%attr(0755, root, root) %{install_dir}/spec/types
 %attr(0755, root, root) %{install_dir}/cfg/cfg_helper.rb
 %attr(0755, root, root) %{install_dir}/check_last_run.sh
 %attr(0755, root, root) %{install_dir}/cron_run.sh
@@ -52,10 +53,12 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/Makefile
 %exclude %{install_dir}/makemeusable
 %exclude %{install_dir}/reports/.gitignore
+%exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
 * Thu Jul 02 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-9.gdc
 - default spec_helper provides SPEC_DIR to all included specs and helpers
+- spec/types is back
 
 * Thu Jul 02 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-8.gdc
 - exclude reports/.gitignore
