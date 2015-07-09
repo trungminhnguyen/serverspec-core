@@ -1,4 +1,5 @@
 require 'parseconfig'
+require 'yaml'
 
 def get_environment
   return ENV['SERVERSPEC_ENV'] ||
