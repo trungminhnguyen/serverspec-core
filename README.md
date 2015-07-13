@@ -83,7 +83,10 @@ Types
 -----
 
 It is possible to build custom [Resource types][rtypes], they should be placed
-in `spec/types/directory`.
+in `spec/types/directory`. There are two `spec/types` locations, both can contain
+types, but should be used differently:
+ - `SPEC_DIR/types` is a place for types which goes with custom specs
+ - `/opt/gdc/serverspec-core/spec/types` should contain types delivered via packages
 
 It is also possible to create custom helper which will include custom types from
 any other location.

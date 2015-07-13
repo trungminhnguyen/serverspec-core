@@ -1,4 +1,5 @@
 require 'parseconfig'
+require 'yaml'
 
 def get_environment
   return ENV['SERVERSPEC_ENV'] ||
@@ -6,11 +7,13 @@ def get_environment
 end
 
 def get_main_config(conf_dir='./cfg/')
+  conf_dir = get_config_option('CONF_DIR', conf_dir)
   return YAML.load_file "#{conf_dir}/serverspec.yml"
 end
 
 def get_all_hosts(conf_dir='./cfg/')
   env = get_environment()
+  conf_dir = get_config_option('CONF_DIR', conf_dir)
   config = get_main_config(conf_dir)
   @hosts = File.join(conf_dir, config[env][:hosts])
   return YAML.load_file(ENV['HOSTS'] || @hosts)
