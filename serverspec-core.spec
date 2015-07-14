@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.0
-Release:          10.gdc
+Release:          11.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -56,6 +56,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Tue Jul 14 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-11.gdc
+- fixed bug when including custom types
+
 * Mon Jul 13 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-10.gdc
 - types are included from both SPEC_DIR and pgk_root paths
 - fix YAML include

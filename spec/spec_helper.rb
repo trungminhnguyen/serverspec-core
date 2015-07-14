@@ -14,7 +14,7 @@ Dir[ SPEC_DIR + "/*/*_helper.rb" ].sort.each { |f| require f }
 # Include custom resource types, by default they should be in packaged /types
 # and configured SPEC_DIR/types
 Dir["./spec/types/*.rb"].sort.each { |f| require f }
-Dir[ SPEC_DIR + "./spec/types/*.rb"].sort.each { |f| require f }
+Dir[ SPEC_DIR + "/types/*.rb"].sort.each { |f| require f }
 include Serverspec::Type
 
 backend = ENV['SERVERSPEC_BACKEND'] || :ssh
