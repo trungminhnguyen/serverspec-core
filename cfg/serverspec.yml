@@ -1,0 +1,6 @@
+---
+
+localenv:
+  :hosts: local.yml
+  :suites:
+    - common
