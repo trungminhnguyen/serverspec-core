@@ -41,6 +41,16 @@ enable it globally or locally, like explained [here][1].
 
 [1]: http://serverspec.org/advanced_tips.html
 
+Custom output
+-------------
+
+To customize the type and verbosity of test results you can use
+[rspec compatible fomatters][2], e.g.
+
+    $ rake spec format=documentation
+
+[2]: http://www.rubydoc.info/gems/rspec-core/RSpec/Core/Formatters
+
 Classifier
 ----------
 
