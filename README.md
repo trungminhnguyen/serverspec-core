@@ -51,6 +51,27 @@ To customize the type and verbosity of test results you can use
 
 [2]: http://www.rubydoc.info/gems/rspec-core/RSpec/Core/Formatters
 
+RSpec tag filtering
+-------------------
+If you use tags in your specs e.g.
+
+``` ruby
+describe file('/etc/hosts'), :not_in_kitchen do
+   it { should be_file }
+   it { should be_readable }
+end
+```
+
+and want to filter them out use the following format.
+
+To include :not_in_kitchen tag run
+
+    $ rake spec tag=not_in_kitchen
+
+To exclude :not_in_kitchen tag run the same but with tilde
+
+    $ rake spec tag=~not_in_kitchen
+
 Classifier
 ----------
 
