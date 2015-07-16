@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.0
-Release:          11.gdc
+Version:          1.1
+Release:          1.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -42,11 +42,14 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %dir %{install_dir}/reports
 %attr(0755, root, root) %{install_dir}/spec/types
 %attr(0755, root, root) %{install_dir}/cfg/cfg_helper.rb
+%attr(0755, root, root) %{install_dir}/cfg/serverspec.yml
+%attr(0755, root, root) %{install_dir}/cfg/local.yml
 %attr(0755, root, root) %{install_dir}/check_last_run.sh
 %attr(0755, root, root) %{install_dir}/cron_run.sh
 %attr(0755, root, root) %{install_dir}/Rakefile
 %attr(0755, root, root) %{install_dir}/serverspec-core.spec
 %attr(0755, root, root) %{install_dir}/spec/spec_helper.rb
+%attr(0755, root, root) %{install_dir}/spec/common/test/hosts_spec.rb
 %attr(0755, root, root) %doc %{install_dir}/*.md
 %attr(0644, root, root) %config(noreplace) %{_sysconfdir}/sysconfig/serverspec
 %exclude %{install_dir}/Gemfile*
@@ -56,6 +59,11 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Thu Jul 16 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.1-1.gdc
+- Sample minimal local configuration provided
+- Output formatting option in CLI
+- Tag filtering ability in CLI
+
 * Tue Jul 14 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.0-11.gdc
 - fixed bug when including custom types
 
