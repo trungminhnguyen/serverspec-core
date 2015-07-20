@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.1
-Release:          1.gdc
+Release:          2.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -59,6 +59,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Mon Jul 20 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.1-2.gdc
+- fix _spec.rb inclusion in SPEC_DIR
+
 * Thu Jul 16 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.1-1.gdc
 - Sample minimal local configuration provided
 - Output formatting option in CLI
