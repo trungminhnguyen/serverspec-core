@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.2
-Release:          2.gdc
+Version:          1.3
+Release:          1.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -60,6 +60,10 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Tue Aug 04 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-1.gdc
+- Update dependencies in bundle to include recent specinfra enhancements
+- Provide default rake task so the user can just run `serverspec` for testing
+
 * Tue Aug 04 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.2-2.gdc
 - Package serverspec together with isolated rubygem bundle
 - Introduce systemwide wrapper of /usr/bin/serverspec

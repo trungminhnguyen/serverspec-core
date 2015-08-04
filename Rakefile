@@ -61,6 +61,8 @@ end
 
 hosts = get_all_hosts(conf_dir)
 
+task default: :spec
+
 desc 'Run serverspec to all hosts'
 task spec: 'check:server:all'
 
