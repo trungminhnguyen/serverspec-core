@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.2
-Release:          1.gdc
+Release:          2.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -21,6 +21,8 @@ BuildRoot:        %{_tmppath}/%{name}-%{version}-root
 rm -fr $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{install_dir}
 cp -a * .bundle $RPM_BUILD_ROOT%{install_dir}
+install -d $RPM_BUILD_ROOT/usr/bin
+mv ./bin/serverspec $RPM_BUILD_ROOT/usr/bin/serverspec
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/
 mv $RPM_BUILD_ROOT%{install_dir}/serverspec.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/serverspec
 
@@ -51,12 +53,17 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %{install_dir}/spec/common/test/hosts_spec.rb
 %attr(0755, root, root) %doc %{install_dir}/*.md
 %attr(0644, root, root) %config(noreplace) %{_sysconfdir}/sysconfig/serverspec
+%attr(0755, root, root) /usr/bin/serverspec
 %exclude %{install_dir}/Makefile
 %exclude %{install_dir}/makemeusable
 %exclude %{install_dir}/reports/.gitignore
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Tue Aug 04 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.2-2.gdc
+- Package serverspec together with isolated rubygem bundle
+- Introduce systemwide wrapper of /usr/bin/serverspec
+
 * Mon Jul 20 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.1-2.gdc
 - fix _spec.rb inclusion in SPEC_DIR
 
