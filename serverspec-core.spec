@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.1
-Release:          2.gdc
+Version:          1.2
+Release:          1.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -11,13 +11,8 @@ Group:            GoodData/Tools
 License:          Gooddata proprietary
 URL:              https://github.com/gooddata/serverspec-core
 Source0:          sources.tar
-BuildArch:        noarch
+BuildArch:        x86_64
 BuildRoot:        %{_tmppath}/%{name}-%{version}-root
-
-Requires:         ruby193-rubygem-rake
-Requires:         ruby193-rubygem-serverspec
-Requires:         ruby193-rubygem-colorize
-Requires:         ruby193-rubygem-parseconfig
 
 %prep
 %setup -q -c
@@ -25,7 +20,7 @@ Requires:         ruby193-rubygem-parseconfig
 %install
 rm -fr $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{install_dir}
-cp -a * $RPM_BUILD_ROOT%{install_dir}
+cp -a * .bundle $RPM_BUILD_ROOT%{install_dir}
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/
 mv $RPM_BUILD_ROOT%{install_dir}/serverspec.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/serverspec
 
@@ -37,6 +32,9 @@ GoodData ServerSpec integration - core package
 
 %files
 %attr(0755, root, root) %dir %{install_dir}
+%attr(0755, root, root) %{install_dir}/.bundle
+%attr(0755, root, root) %{install_dir}/bundle
+%attr(0755, root, root) %{install_dir}/bin
 %attr(0755, root, root) %dir %{install_dir}/cfg
 %attr(0755, root, root) %dir %{install_dir}/spec
 %attr(0755, root, root) %dir %{install_dir}/reports
@@ -46,13 +44,13 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %{install_dir}/cfg/local.yml
 %attr(0755, root, root) %{install_dir}/check_last_run.sh
 %attr(0755, root, root) %{install_dir}/cron_run.sh
+%attr(0755, root, root) %{install_dir}/Gemfile*
 %attr(0755, root, root) %{install_dir}/Rakefile
 %attr(0755, root, root) %{install_dir}/serverspec-core.spec
 %attr(0755, root, root) %{install_dir}/spec/spec_helper.rb
 %attr(0755, root, root) %{install_dir}/spec/common/test/hosts_spec.rb
 %attr(0755, root, root) %doc %{install_dir}/*.md
 %attr(0644, root, root) %config(noreplace) %{_sysconfdir}/sysconfig/serverspec
-%exclude %{install_dir}/Gemfile*
 %exclude %{install_dir}/Makefile
 %exclude %{install_dir}/makemeusable
 %exclude %{install_dir}/reports/.gitignore
