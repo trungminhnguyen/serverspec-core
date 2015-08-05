@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.3
-Release:          5.gdc
+Version:          1.4
+Release:          1.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -62,6 +62,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Mon Aug 10 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.4-1.gdc
+- Add junit formatter
+
 * Mon Aug 10 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-5.gdc
 - Fix the case of undefined roles for host
 
