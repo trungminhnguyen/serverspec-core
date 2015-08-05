@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.3
-Release:          2.gdc
+Release:          3.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -13,6 +13,8 @@ URL:              https://github.com/gooddata/serverspec-core
 Source0:          sources.tar
 BuildArch:        x86_64
 BuildRoot:        %{_tmppath}/%{name}-%{version}-root
+
+Requires:         ruby193-rubygem-bundler
 
 %prep
 %setup -q -c
@@ -60,6 +62,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Wed Aug 05 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-3.gdc
+- Add runtime dependency on bundler
+
 * Tue Aug 04 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-2.gdc
 - Update cron_run.sh to use bundled serverspec
 
