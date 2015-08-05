@@ -192,7 +192,7 @@ end
 
 # Build final report only after last check
 running_check_tasks = Rake.application.top_level_tasks.select do |task|
-  task.start_with?('check:') || task == 'spec'
+  task.start_with?('check:') || ['spec', 'default'].include?(task)
 end
 unless running_check_tasks.empty?
   Rake::Task[running_check_tasks.last].enhance do

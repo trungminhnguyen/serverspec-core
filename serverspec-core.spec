@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.3
-Release:          3.gdc
+Release:          4.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -62,6 +62,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Wed Aug 05 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-4.gdc
+- Compile overall json report also with default rake task
+
 * Wed Aug 05 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-3.gdc
 - Add runtime dependency on bundler
 
