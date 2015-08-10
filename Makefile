@@ -1,4 +1,5 @@
 tarball:
-	tar cvf sources.tar *
+	scl enable ruby193 'bundle install --standalone --binstubs --without=development'
+	tar cvf sources.tar * .bundle
 clean:
 	rm -rf sources.tar

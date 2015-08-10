@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem "rake"
-gem "serverspec"
+gem "serverspec", '~> 2.20'
+gem "specinfra", '~> 2.40'
 gem "colorize"
 gem "parseconfig"
 

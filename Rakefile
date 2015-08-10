@@ -61,6 +61,8 @@ end
 
 hosts = get_all_hosts(conf_dir)
 
+task default: :spec
+
 desc 'Run serverspec to all hosts'
 task spec: 'check:server:all'
 
@@ -92,7 +94,7 @@ namespace :check do
     roles = roles.flatten.uniq
     roles.each do |role|
       desc "Run serverspec to role #{role}"
-      task "#{role}" => hosts.select { |_hostname, h| h[:roles].include? role }
+      task "#{role}" => hosts.select { |_hostname, h| h[:roles].to_a.include? role }
         .map do
           |hostname, _h| 'check:server:' + hostname
         end
@@ -190,7 +192,7 @@ end
 
 # Build final report only after last check
 running_check_tasks = Rake.application.top_level_tasks.select do |task|
-  task.start_with?('check:') || task == 'spec'
+  task.start_with?('check:') || ['spec', 'default'].include?(task)
 end
 unless running_check_tasks.empty?
   Rake::Task[running_check_tasks.last].enhance do

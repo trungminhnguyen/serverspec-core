@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.1
-Release:          2.gdc
+Version:          1.3
+Release:          5.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -11,13 +11,10 @@ Group:            GoodData/Tools
 License:          Gooddata proprietary
 URL:              https://github.com/gooddata/serverspec-core
 Source0:          sources.tar
-BuildArch:        noarch
+BuildArch:        x86_64
 BuildRoot:        %{_tmppath}/%{name}-%{version}-root
 
-Requires:         ruby193-rubygem-rake
-Requires:         ruby193-rubygem-serverspec
-Requires:         ruby193-rubygem-colorize
-Requires:         ruby193-rubygem-parseconfig
+Requires:         ruby193-rubygem-bundler
 
 %prep
 %setup -q -c
@@ -25,7 +22,9 @@ Requires:         ruby193-rubygem-parseconfig
 %install
 rm -fr $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{install_dir}
-cp -a * $RPM_BUILD_ROOT%{install_dir}
+cp -a * .bundle $RPM_BUILD_ROOT%{install_dir}
+install -d $RPM_BUILD_ROOT/usr/bin
+mv ./bin/serverspec $RPM_BUILD_ROOT/usr/bin/serverspec
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/
 mv $RPM_BUILD_ROOT%{install_dir}/serverspec.sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/serverspec
 
@@ -37,6 +36,9 @@ GoodData ServerSpec integration - core package
 
 %files
 %attr(0755, root, root) %dir %{install_dir}
+%attr(0755, root, root) %{install_dir}/.bundle
+%attr(0755, root, root) %{install_dir}/bundle
+%attr(0755, root, root) %{install_dir}/bin
 %attr(0755, root, root) %dir %{install_dir}/cfg
 %attr(0755, root, root) %dir %{install_dir}/spec
 %attr(0755, root, root) %dir %{install_dir}/reports
@@ -46,19 +48,40 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %{install_dir}/cfg/local.yml
 %attr(0755, root, root) %{install_dir}/check_last_run.sh
 %attr(0755, root, root) %{install_dir}/cron_run.sh
+%attr(0755, root, root) %{install_dir}/Gemfile*
 %attr(0755, root, root) %{install_dir}/Rakefile
 %attr(0755, root, root) %{install_dir}/serverspec-core.spec
 %attr(0755, root, root) %{install_dir}/spec/spec_helper.rb
 %attr(0755, root, root) %{install_dir}/spec/common/test/hosts_spec.rb
 %attr(0755, root, root) %doc %{install_dir}/*.md
 %attr(0644, root, root) %config(noreplace) %{_sysconfdir}/sysconfig/serverspec
-%exclude %{install_dir}/Gemfile*
+%attr(0755, root, root) /usr/bin/serverspec
 %exclude %{install_dir}/Makefile
 %exclude %{install_dir}/makemeusable
 %exclude %{install_dir}/reports/.gitignore
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Mon Aug 10 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-5.gdc
+- Fix the case of undefined roles for host
+
+* Wed Aug 05 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-4.gdc
+- Compile overall json report also with default rake task
+
+* Wed Aug 05 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-3.gdc
+- Add runtime dependency on bundler
+
+* Tue Aug 04 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-2.gdc
+- Update cron_run.sh to use bundled serverspec
+
+* Tue Aug 04 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.3-1.gdc
+- Update dependencies in bundle to include recent specinfra enhancements
+- Provide default rake task so the user can just run `serverspec` for testing
+
+* Tue Aug 04 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.2-2.gdc
+- Package serverspec together with isolated rubygem bundle
+- Introduce systemwide wrapper of /usr/bin/serverspec
+
 * Mon Jul 20 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.1-2.gdc
 - fix _spec.rb inclusion in SPEC_DIR
 

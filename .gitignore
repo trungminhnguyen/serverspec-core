@@ -4,7 +4,9 @@ bundle/
 .bundle/
 node_modules
 #ignore binstubs
-bin/
+bin/*
+#leave wrapper
+!bin/serverspec
 #random files put to serve via http
 public/misc
 #runtime directories
