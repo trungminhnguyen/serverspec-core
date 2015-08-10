@@ -94,7 +94,7 @@ namespace :check do
     roles = roles.flatten.uniq
     roles.each do |role|
       desc "Run serverspec to role #{role}"
-      task "#{role}" => hosts.select { |_hostname, h| h[:roles].include? role }
+      task "#{role}" => hosts.select { |_hostname, h| h[:roles].to_a.include? role }
         .map do
           |hostname, _h| 'check:server:' + hostname
         end
