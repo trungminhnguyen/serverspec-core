@@ -29,6 +29,10 @@ class ServerspecTask < RSpec::Core::RakeTask
   def run_task(verbose)
     json = "#{@@reports}/current/#{target}.json"
     @rspec_opts = ['--format', 'json', '--out', json]
+    if ENV['junit']
+      junit = "#{@@reports}/current/#{target}.xml"
+      @rspec_opts += ['--format', 'RspecJunitFormatter', '--out', junit]
+    end
     @rspec_opts += ['--format', ENV['format']] if ENV['format'] 
     @rspec_opts += ['--tag', ENV['tag']] if ENV['tag'] 
     if ENV['SERVERSPEC_BACKEND'] == 'exec'

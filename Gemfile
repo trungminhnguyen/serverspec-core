@@ -5,6 +5,7 @@ gem "serverspec", '~> 2.20'
 gem "specinfra", '~> 2.40'
 gem "colorize"
 gem "parseconfig"
+gem "rspec_junit_formatter"
 
 group :cista do
   gem 'jira-ruby', require: 'jira'

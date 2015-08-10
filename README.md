@@ -41,6 +41,14 @@ enable it globally or locally, like explained [here][1].
 
 [1]: http://serverspec.org/advanced_tips.html
 
+JUnit output
+------------
+To create junit compatible reports together with json one use
+
+    $ rake spec junit=true
+
+it will create additional xml report under `reports/current/`
+
 Custom output
 -------------
 
