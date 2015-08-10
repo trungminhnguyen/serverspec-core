@@ -10,6 +10,7 @@ gem "rspec_junit_formatter"
 group :cista do
   gem 'jira-ruby', require: 'jira'
   gem 'confluence-client'
+  gem 'rest-client'
 end
 
 group :development do

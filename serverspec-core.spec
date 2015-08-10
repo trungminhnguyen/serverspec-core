@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.4
+Version:          1.5
 Release:          1.gdc
 
 Vendor:           GoodData
@@ -58,10 +58,14 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) /usr/bin/serverspec
 %exclude %{install_dir}/Makefile
 %exclude %{install_dir}/makemeusable
+%exclude %{install_dir}/bundle.log
 %exclude %{install_dir}/reports/.gitignore
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Mon Aug 10 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.5-1.gdc
+- Add cista related gems
+
 * Mon Aug 10 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.4-1.gdc
 - Add junit formatter
 
