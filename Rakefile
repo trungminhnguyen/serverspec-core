@@ -7,6 +7,7 @@ require 'yaml'
 require 'net/http'
 require 'uri'
 require 'parseconfig'
+require 'rubocop/rake_task'
 require './cfg/cfg_helper'
 
 conf_dir = get_config_option('CONF_DIR', './cfg/')
@@ -69,6 +70,11 @@ task default: :spec
 
 desc 'Run serverspec to all hosts'
 task spec: 'check:server:all'
+
+desc 'Run RuboCop over your fancy specs'
+RuboCop::RakeTask.new(:rubocop) do |task|
+  task.patterns = [@@spec_dir + '/**/*.rb']
+end
 
 namespace :check do
 

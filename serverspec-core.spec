@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.5
+Version:          1.6
 Release:          1.gdc
 
 Vendor:           GoodData
@@ -63,6 +63,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Fri Aug 28 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.6-1.gdc
+- Embed rubocop rake tasks into serverspec
+
 * Mon Aug 10 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.5-1.gdc
 - Add cista related gems
 
