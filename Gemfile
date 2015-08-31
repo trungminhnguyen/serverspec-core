@@ -6,6 +6,7 @@ gem "specinfra", '~> 2.40'
 gem "colorize"
 gem "parseconfig"
 gem "rspec_junit_formatter"
+gem 'rubocop'
 
 group :cista do
   gem 'jira-ruby', require: 'jira'
@@ -15,5 +16,4 @@ end
 
 group :development do
   gem 'pry'
-  gem 'rubocop', require: :false
 end

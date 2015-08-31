@@ -132,6 +132,21 @@ any other location.
 
 [rtypes]: http://serverspec.org/resource_types.html
 
+Style check with RuboCop
+------------------------
+To check style of your specs just run
+
+    $ rake rubocop
+
+You can even perform autocorrect with
+
+    $ rake rubocop:auto_correct
+
+It will try to fix the offenses automatically and report.
+After that you can review the fixes and commit them into repository.
+
+For details on RuboCop project see https://github.com/bbatsov/rubocop
+
 Parallel execution
 ------------------
 
