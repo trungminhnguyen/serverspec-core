@@ -15,9 +15,17 @@ conf_dir = get_config_option('CONF_DIR', './cfg/')
 env = get_environment
 config = get_main_config(conf_dir, env)
 @suites = config[:suites] # Test suites to use for env
-@@reports = get_config_option('REPORTS_DIR', './reports') # Where to store JSON reports
-@@spec_dir = get_config_option('SPEC_DIR', './spec') # Where to store JSON specs
-@@exit_status = 0 # Overall test run exist status
+REPORTS = get_config_option('REPORTS_DIR', './reports') # Where to store JSON reports
+SPEC_DIR = get_config_option('SPEC_DIR', './spec') # Where to store JSON specs
+
+class ExitStatus
+  def self.code=(x)
+    @code = x
+  end
+  def self.code
+    @code
+  end
+end
 
 # Special version of RakeTask for serverspec which comes with better
 # reporting
@@ -27,10 +35,10 @@ class ServerspecTask < RSpec::Core::RakeTask
 
   # Run our serverspec task. Errors are ignored.
   def run_task(verbose)
-    json = "#{@@reports}/current/#{target}.json"
+    json = "#{REPORTS}/current/#{target}.json"
     @rspec_opts = ['--format', 'json', '--out', json]
     if ENV['junit']
-      junit = "#{@@reports}/current/#{target}.xml"
+      junit = "#{REPORTS}/current/#{target}.xml"
       @rspec_opts += ['--format', 'RspecJunitFormatter', '--out', junit]
     end
     @rspec_opts += ['--format', ENV['format']] if ENV['format']
@@ -53,13 +61,13 @@ class ServerspecTask < RSpec::Core::RakeTask
     failures = summary['failure_count']
     if failures > 0
       print format('[%-3s/%-4s] ', failures, total).yellow, target, "\n"
-      @@exit_status = 1
+      ExitStatus.code = 1
     else
       print "[OK /#{total} ] ".green, target, "\n"
     end
     rescue => e
       print '[ERROR   ] '.red, target, " (#{e.message})", "\n"
-      @@exit_status = 1
+      ExitStatus.code = 1
   end
 end
 
@@ -72,7 +80,7 @@ task spec: 'check:server:all'
 
 desc 'Run RuboCop over your fancy specs'
 RuboCop::RakeTask.new(:rubocop) do |task|
-  task.patterns = [@@spec_dir + '/**/*.rb']
+  task.patterns = [SPEC_DIR + '/**/*.rb']
 end
 
 namespace :check do
@@ -92,7 +100,7 @@ namespace :check do
         dirs = ['all'] + host[:roles] + [hostname]
         t.target = hostname
         t.tags = host[:tags]
-        t.pattern = "#{@@spec_dir}/{" + @suites.join(',') + '}/{' + dirs.join(',') + '}/*_spec.rb'
+        t.pattern = "#{SPEC_DIR}/{" + @suites.join(',') + '}/{' + dirs.join(',') + '}/*_spec.rb'
       end
     end
   end
@@ -114,12 +122,12 @@ end
 namespace :reports do
   desc 'Clean up old partial reports'
   task :clean do
-    FileUtils.rm_rf "#{@@reports}/current"
+    FileUtils.rm_rf "#{REPORTS}/current"
   end
 
   desc 'Clean reports without results'
   task :housekeep do
-    files = FileList.new("#{@@reports}/*.json").map do |f|
+    files = FileList.new("#{REPORTS}/*.json").map do |f|
       content = File.read(f)
       if content.empty?
         # No content, let's remove it
@@ -144,7 +152,7 @@ namespace :reports do
 
   desc 'Gzip all reports'
   task :gzip do
-    FileList.new("#{@@reports}/*.json").each do |f|
+    FileList.new("#{REPORTS}/*.json").each do |f|
       system 'gzip', f
     end
   end
@@ -154,11 +162,11 @@ namespace :reports do
   task :build, :tasks do |_t, args|
     args.with_defaults(tasks: ['unspecified'])
     now = Time.now
-    fname = format("#{@@reports}/%s--%s.json",
+    fname = format("#{REPORTS}/%s--%s.json",
                    args[:tasks].join('-'), now.strftime('%Y-%m-%dT%H:%M:%S'))
     File.open(fname, 'w') do |f|
       # Test results
-      tests = FileList.new("#{@@reports}/current/*.json").sort.map do |j|
+      tests = FileList.new("#{REPORTS}/current/*.json").sort.map do |j|
         content = File.read(j).strip
         {
           hostname: File.basename(j, '.json'),
@@ -166,7 +174,7 @@ namespace :reports do
         }
       end.to_a
       # Relevant source files
-      sources = FileList.new("#{@@reports}/current/*.json").sort.map do |j|
+      sources = FileList.new("#{REPORTS}/current/*.json").sort.map do |j|
         content = File.read(j).strip
         results = JSON.parse(
                       content.empty? ? '{"examples": []}' : content)['examples']
@@ -186,7 +194,7 @@ namespace :reports do
         response = Net::HTTP.get_response(uri).code
       rescue
       end
-      exit @@exit_status
+      exit ExitStatus.code
     end
   end
 end
