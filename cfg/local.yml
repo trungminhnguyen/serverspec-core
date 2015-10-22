@@ -1,3 +1,13 @@
 localhost:
   :roles:
     - test
+  :labels:
+    - hwcrypt
+localhost2:
+  :roles:
+    - test
+  :labels:
+    - dell
+localhost3:
+  :roles:
+    - test

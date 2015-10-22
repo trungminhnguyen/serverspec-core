@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.6
+Version:          1.7
 Release:          1.gdc
 
 Vendor:           GoodData
@@ -63,6 +63,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Thu Oct 22 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.7-1.gdc
+- Remove tag notion confusion by renaming serverspec tag to label
+
 * Fri Aug 28 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.6-1.gdc
 - Embed rubocop rake tasks into serverspec
 

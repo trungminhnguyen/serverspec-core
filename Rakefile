@@ -31,7 +31,7 @@ end
 # reporting
 class ServerspecTask < RSpec::Core::RakeTask
   attr_accessor :target
-  attr_accessor :tags
+  attr_accessor :labels
 
   # Run our serverspec task. Errors are ignored.
   def run_task(verbose)
@@ -48,7 +48,7 @@ class ServerspecTask < RSpec::Core::RakeTask
     else
       @rspec_opts += ['-c']
     end
-    system("env TARGET_HOST=#{target} TARGET_TAGS=#{(tags || [])
+    system("env TARGET_HOST=#{target} TARGET_LABELS=#{(labels || [])
            .join(',')} #{spec_command}")
     status(target, json) if verbose
   end
@@ -90,7 +90,7 @@ namespace :check do
     desc 'Run serverspec to all hosts'
     unless ENV['SERVERSPEC_BACKEND'] == 'exec'
       hosts.delete_if do |hostname, host|
-        host[:tags] and host[:tags].include? 'localhost_only'
+        host[:labels] and host[:labels].include? 'localhost_only'
       end
     end
     task all: hosts.keys.map { |h| h }
@@ -99,7 +99,7 @@ namespace :check do
       ServerspecTask.new(hostname.to_sym) do |t|
         dirs = ['all'] + host[:roles] + [hostname]
         t.target = hostname
-        t.tags = host[:tags]
+        t.labels = host[:labels]
         t.pattern = "#{SPEC_DIR}/{" + @suites.join(',') + '}/{' + dirs.join(',') + '}/*_spec.rb'
       end
     end

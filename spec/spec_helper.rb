@@ -29,6 +29,6 @@ RSpec.configure do |c|
   c.disable_sudo = true
   c.host  = ENV['TARGET_HOST']
 
-  tags = (ENV['TARGET_TAGS'] || '').split(',')
-  c.filter_run_excluding tag: ->(t) { !tags.include?(t) }
+  labels = (ENV['TARGET_LABELS'] || '').split(',')
+  c.filter_run_excluding label: ->(l) { !labels.include?(l) }
 end

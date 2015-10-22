@@ -15,13 +15,13 @@ First steps
 -----------
 
 Before using this example, you must provide your list of hosts in a
-file named `hosts.yml`. 
+file named `hosts.yml`.
 
     dev-cmp04.int.na.getgooddata.com:
       :roles:
         - compute
         - dev
-      :tags:
+      :labels:
         - na
 
 To install the dependencies, use `bundle install`.
@@ -61,10 +61,10 @@ To customize the type and verbosity of test results you can use
 
 RSpec tag filtering
 -------------------
-If you use tags in your specs e.g.
+If you use generic rspec tags in your specs e.g.
 
 ``` ruby
-describe file('/etc/hosts'), :not_in_kitchen do
+describe file('/etc/hosts'), :skip_in_kitchen do
    it { should be_file }
    it { should be_readable }
 end
@@ -72,19 +72,19 @@ end
 
 and want to filter them out use the following format.
 
-To include :not_in_kitchen tag run
+To include :skip_in_kitchen tag run
 
     $ rake spec tag=not_in_kitchen
 
-To exclude :not_in_kitchen tag run the same but with tilde
+To exclude :skip_in_kitchen tag run the same but with tilde
 
-    $ rake spec tag=~not_in_kitchen
+    $ rake spec tag=~skip_in_kitchen
 
 Classifier
 ----------
 
-A role is just a string in :roles: array that should also be 
-a subdirectory in the `spec/` directory. 
+A role is just a string in :roles: array that should also be
+a subdirectory in the `spec/` directory.
 In this subdirectory, you can put any test that should be
 run for the given role. Here is a simple example of a directory
 structure for three roles:
@@ -98,15 +98,15 @@ structure for three roles:
     └── web
         └── apache2_spec.rb
 
-Moreover, there is optional :tags: array in definition whose purpose 
-is to attach tags to tests. Those tags are then made available for conditional
+Moreover, there is optional :labels: array in definition whose purpose
+is to attach labels to tests. Those labels are then made available for conditional
 tests. You can do something like this with them:
 
-    describe file('/data/images'), :tag => "eu" do
+    describe file('/data/images'), :label => "eu" do
       it { should be_mounted.with( :type => 'nfs' ) }
     end
 
-This test will only be executed if `eu` is one of the tags of the
+This test will only be executed if `eu` is one of the labels of the
 current host.
 
 Helpers
