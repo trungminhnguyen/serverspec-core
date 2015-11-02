@@ -23,7 +23,7 @@ class ExitStatus
     @code = x
   end
   def self.code
-    @code
+    @code ||= 0
   end
 end
 
