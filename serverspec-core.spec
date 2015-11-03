@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.7
-Release:          6%{?dist}.gdc
+Release:          7%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -14,7 +14,7 @@ Source0:          sources.tar
 BuildArch:        x86_64
 BuildRoot:        %{_tmppath}/%{name}-%{version}-root
 
-%if "%{?dist}" == "el6"
+%if "%{?dist}" == ".el6"
 Requires:         ruby193-rubygem-bundler
 %else
 Requires:         rubygem-bundler
@@ -69,6 +69,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Mon Nov 2 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.7-7%{?dist}.gdc
+- Fix rubygem193-bundler dependency for el6 with proper dist evaluation
+
 * Mon Nov 2 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.7-6%{?dist}.gdc
 - Enable el6/el7 cross packaging
 - Fix exit status default value
