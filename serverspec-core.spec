@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.7
-Release:          7%{?dist}.gdc
+Version:          1.8
+Release:          0%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -49,6 +49,7 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %dir %{install_dir}/spec
 %attr(0755, root, root) %dir %{install_dir}/reports
 %attr(0755, root, root) %{install_dir}/spec/types
+%attr(0755, root, root) %{install_dir}/spec/helper
 %attr(0755, root, root) %{install_dir}/cfg/cfg_helper.rb
 %attr(0755, root, root) %{install_dir}/cfg/serverspec.yml
 %attr(0755, root, root) %{install_dir}/cfg/local.yml
@@ -69,6 +70,10 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Fri Nov 20 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.8-0%{?dist}.gdc
+- New rake task selfcheck to test serverspec-core features
+- New be_in matcher using include?
+
 * Mon Nov 2 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.7-7%{?dist}.gdc
 - Fix rubygem193-bundler dependency for el6 with proper dist evaluation
 
