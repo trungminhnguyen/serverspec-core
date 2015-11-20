@@ -118,6 +118,10 @@ specs with custom helpers - eg. common functions.
 
 Default `spec_helper` parse all helpers with path `SPEC_DIR/*/*_helper.rb`.
 
+When creating helpers it is desired to add tests also, every file ending
+`_test.rb` in `spec/helper` will be run when `serverspec-core selfcheck` is
+invoked.
+
 Types
 -----
 
