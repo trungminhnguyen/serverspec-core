@@ -83,6 +83,11 @@ RuboCop::RakeTask.new(:rubocop) do |task|
   task.patterns = [SPEC_DIR + '/**/*.rb']
 end
 
+desc 'Run selfchecks for your specs in *_test.rb'
+RSpec::Core::RakeTask.new(:selfcheck) do |t|
+  t.pattern = [ SPEC_DIR + '/**/*_test.rb', './spec/**/*_test.rb']
+end
+
 namespace :check do
 
   # Per server tasks

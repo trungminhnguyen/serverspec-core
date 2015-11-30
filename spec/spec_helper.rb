@@ -9,7 +9,7 @@ require './cfg/cfg_helper'
 SPEC_DIR = get_config_option('SPEC_DIR', './spec')
 
 # Include helpers
-Dir[SPEC_DIR + '/**/*_helper.rb'].sort.each { |f| require f }
+Dir[SPEC_DIR + '/**/*_helper.rb', './spec/**/*_helper.rb'].sort.each { |f| require f }
 
 # Include custom resource types, by default they should be in packaged /types
 # and configured SPEC_DIR/types
@@ -27,7 +27,7 @@ RSpec.configure do |c|
     config.syntax = [:should, :expect]
   end
   c.disable_sudo = true
-  c.host  = ENV['TARGET_HOST']
+  c.host = ENV['TARGET_HOST']
 
   labels = (ENV['TARGET_LABELS'] || '').split(',')
   c.filter_run_excluding label: ->(l) { !labels.include?(l) }
