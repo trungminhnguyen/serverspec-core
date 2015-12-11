@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.8
-Release:          0%{?dist}.gdc
+Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -15,9 +15,9 @@ BuildArch:        x86_64
 BuildRoot:        %{_tmppath}/%{name}-%{version}-root
 
 %if "%{?dist}" == ".el6"
-Requires:         ruby193-rubygem-bundler
+Requires:         ruby193-rubygem-bundler nc
 %else
-Requires:         rubygem-bundler
+Requires:         rubygem-bundler nmap-ncat
 %endif
 
 Requires:         redhat-lsb-core
@@ -70,6 +70,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Fri Dec 11 2015 Martin Ducár <martin.ducar@gooddata.com> 1.8-1%{?dist}.gdc
+- Added netcat dependency for host port reachable test
+
 * Fri Nov 20 2015 Martin Surovcak <martin.surovcak@gooddata.com> 1.8-0%{?dist}.gdc
 - New rake task selfcheck to test serverspec-core features
 - New be_in matcher using include?
