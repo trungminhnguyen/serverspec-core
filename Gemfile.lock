@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/gooddata/rubocop-junit-formatter.git
+  revision: e376f11fa126b041a8d8cee23b2d24cb8dda4580
+  specs:
+    rubocop-junit-formatter (0.1.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -106,5 +112,6 @@ DEPENDENCIES
   rest-client
   rspec_junit_formatter
   rubocop
+  rubocop-junit-formatter!
   serverspec (~> 2.20)
   specinfra (~> 2.40)

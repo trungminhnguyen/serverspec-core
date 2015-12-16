@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.8
+Version:          1.9
 Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
@@ -70,6 +70,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Wed Dec 16 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.9-1%{?dist}.gdc
+- Add junit formatter to rubocop
+
 * Fri Dec 11 2015 Martin Ducár <martin.ducar@gooddata.com> 1.8-1%{?dist}.gdc
 - Added netcat dependency for host port reachable test
 

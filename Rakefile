@@ -7,7 +7,9 @@ require 'yaml'
 require 'net/http'
 require 'uri'
 require 'parseconfig'
+require 'rubocop'
 require 'rubocop/rake_task'
+require 'rubocop-junit-formatter'
 require './cfg/cfg_helper'
 
 conf_dir = get_config_option('CONF_DIR', './cfg/')
@@ -81,6 +83,13 @@ task spec: 'check:server:all'
 desc 'Run RuboCop over your fancy specs'
 RuboCop::RakeTask.new(:rubocop) do |task|
   task.patterns = [SPEC_DIR + '/**/*.rb']
+  if ENV['junit']
+    # https://github.com/bbatsov/rubocop/issues/1584
+    formatter = 'RuboCop::Formatter::JUnitFormatter'
+  else
+    formatter = 'progress'
+  end
+  task.formatters = [ formatter ]
 end
 
 desc 'Run selfchecks for your specs in *_test.rb'
