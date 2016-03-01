@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.9
+Version:          1.9.1
 Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
@@ -70,6 +70,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Tue Mar 1 2016 Yury Tsarev <yury.tsarev@gooddata.com> 1.9.1-1%{?dist}.gdc
+- Add customized rspec formatter
+
 * Wed Dec 16 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.9-1%{?dist}.gdc
 - Add junit formatter to rubocop
 
