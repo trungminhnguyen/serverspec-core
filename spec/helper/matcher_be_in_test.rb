@@ -1,3 +1,6 @@
+# Copyright (c) 2016, GoodData Corporation. All rights reserved.
+# This source code is licensed under the BSD-style license found in the
+# LICENSE file in the root directory of this source tree.
 #
 # This is a test for spec/helper/matcher_be_in_test.rb
 #
