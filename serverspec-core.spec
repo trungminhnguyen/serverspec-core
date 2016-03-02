@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.9
+Version:          1.9.1
 Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
@@ -61,6 +61,7 @@ GoodData ServerSpec integration - core package
 %attr(0755, root, root) %{install_dir}/spec/spec_helper.rb
 %attr(0755, root, root) %{install_dir}/spec/common/test/hosts_spec.rb
 %attr(0755, root, root) %doc %{install_dir}/*.md
+%attr(0755, root, root) %doc %{install_dir}/LICENSE.txt
 %attr(0644, root, root) %config(noreplace) %{_sysconfdir}/sysconfig/serverspec
 %attr(0755, root, root) /usr/bin/serverspec
 %exclude %{install_dir}/Makefile
@@ -70,6 +71,10 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Tue Mar 1 2016 Yury Tsarev <yury.tsarev@gooddata.com> 1.9.1-1%{?dist}.gdc
+- Add customized rspec formatter
+- Include LICENSE.txt
+
 * Wed Dec 16 2015 Yury Tsarev <yury.tsarev@gooddata.com> 1.9-1%{?dist}.gdc
 - Add junit formatter to rubocop
 

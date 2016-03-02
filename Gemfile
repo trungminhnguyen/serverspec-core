@@ -5,7 +5,8 @@ gem "serverspec", '~> 2.20'
 gem "specinfra", '~> 2.40'
 gem "colorize"
 gem "parseconfig"
-gem "rspec_junit_formatter"
+gem "rspec_junit_formatter", github: 'gooddata/rspec_junit_formatter',
+                             branch: 'yut-qa-5784'
 gem 'rubocop'
 gem 'rubocop-junit-formatter', github: 'gooddata/rubocop-junit-formatter'
 
