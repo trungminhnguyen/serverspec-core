@@ -7,7 +7,7 @@ gem "colorize"
 gem "parseconfig"
 gem "rspec_junit_formatter", github: 'gooddata/rspec_junit_formatter',
                              branch: 'yut-qa-5784'
-gem 'rubocop'
+gem 'rubocop', '~> 0.37'
 gem 'rubocop-junit-formatter', github: 'gooddata/rubocop-junit-formatter'
 
 group :cista do

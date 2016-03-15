@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.9.1
+Version:          1.9.2
 Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
@@ -71,6 +71,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Tue Mar 15 2016 Yury Tsarev <yury.tsarev@gooddata.com> 1.9.2-1%{?dist}.gdc
+- Update embedded rubocop version to 0.37
+
 * Tue Mar 1 2016 Yury Tsarev <yury.tsarev@gooddata.com> 1.9.1-1%{?dist}.gdc
 - Add customized rspec formatter
 - Include LICENSE.txt
