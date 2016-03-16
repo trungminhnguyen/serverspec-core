@@ -90,6 +90,7 @@ RuboCop::RakeTask.new(:rubocop) do |task|
   if ENV['junit']
     # https://github.com/bbatsov/rubocop/issues/1584
     formatter = 'RuboCop::Formatter::JUnitFormatter'
+    task.options = ['-o', "#{REPORTS}/rubocop.xml"]
   else
     formatter = 'progress'
   end
