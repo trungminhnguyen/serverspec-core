@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/gooddata/rubocop-junit-formatter.git
-  revision: e376f11fa126b041a8d8cee23b2d24cb8dda4580
+  revision: a4c2442413cb8c38763ad0df72158a8f2a38ff65
   specs:
     rubocop-junit-formatter (0.1.3)
 
