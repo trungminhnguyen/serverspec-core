@@ -7,5 +7,6 @@ tarball:
 		$(bundle);                      \
 	fi &> bundle.log
 	tar cvf sources.tar * .bundle
+sources: tarball
 clean:
 	rm -rf sources.tar
