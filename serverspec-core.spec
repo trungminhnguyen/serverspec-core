@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.9.3
-Release:          2%{?dist}.gdc
+Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -71,9 +71,6 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
-* Thu Mar 17 2016 Radek Smidl <radek.smidl@gooddata.com> 1.9.3-2%{?dist}.gdc
-- Makefile changed to support sources target
-
 * Wed Mar 16 2016 Radek Smidl <radek.smidl@gooddata.com> 1.9.3-1%{?dist}.gdc
 - cron_run.sh can take command line parameters
 
