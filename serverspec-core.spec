@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.9.4
+Version:          1.9.5
 Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
@@ -71,6 +71,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Thu Mar 31 2016 Yury Tsarev <yury.tsarev@gooddata.com> 1.9.5-1%{?dist}.gdc
+- Provide parallel console output for junit enabled rubocop run
+
 * Wed Mar 16 2016 Yury Tsarev <yury.tsarev@gooddata.com> 1.9.4-1%{?dist}.gdc
 - Enhance rubocop junit formatter output
 
