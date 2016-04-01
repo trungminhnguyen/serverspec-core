@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.9.5
-Release:          1%{?dist}.gdc
+Release:          2%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -15,7 +15,7 @@ BuildArch:        x86_64
 BuildRoot:        %{_tmppath}/%{name}-%{version}-root
 
 %if "%{?dist}" == ".el6"
-Requires:         ruby193-rubygem-bundler nc
+Requires:         ruby193-rubygem-bundler >= 1.11.2-5, nc
 %else
 Requires:         rubygem-bundler nmap-ncat
 %endif
