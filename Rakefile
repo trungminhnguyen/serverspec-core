@@ -89,12 +89,12 @@ RuboCop::RakeTask.new(:rubocop) do |task|
   task.patterns = [SPEC_DIR + '/**/*.rb']
   if ENV['junit']
     # https://github.com/bbatsov/rubocop/issues/1584
-    formatter = 'RuboCop::Formatter::JUnitFormatter'
+    formatters = ['progress', 'RuboCop::Formatter::JUnitFormatter']
     task.options = ['-o', "#{REPORTS}/rubocop.xml"]
   else
-    formatter = 'progress'
+    formatters = ['progress']
   end
-  task.formatters = [ formatter ]
+  task.formatters = formatters
 end
 
 desc 'Run selfchecks for your specs in *_test.rb'
