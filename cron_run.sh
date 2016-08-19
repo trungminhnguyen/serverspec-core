@@ -4,6 +4,8 @@ fqdn=`hostname -f`
 
 serverspec "check:server:$fqdn $*" &> ./cron_run.log
 
+echo -n $(date)
+
 if [ $? -ne 0 ];then
   cat ./cron_run.log
   echo 'LAST RUN: Failed' >> ./cron_run.log
