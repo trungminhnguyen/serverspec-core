@@ -4,7 +4,7 @@ fqdn=`hostname -f`
 
 serverspec "check:server:$fqdn $*" &> ./cron_run.log
 
-echo -n $(date)
+echo -n $(date) >> ./cron_run.log
 
 if [ $? -ne 0 ];then
   cat ./cron_run.log
