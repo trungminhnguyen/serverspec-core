@@ -191,3 +191,10 @@ need a configuration like this in nginx to be able to serve them:
 
 If your version of nginx does not support `gunzip on`, you will
 usually be fine without it...
+
+Maintenance level
+-----------------
+
+This project is in the maintenance mode.
+
+The patches are going to be provided by engineers at GoodData Inc. in reactive manner.
