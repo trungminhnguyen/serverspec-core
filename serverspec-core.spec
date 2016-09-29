@@ -8,7 +8,7 @@ Release:          2%{?dist}.gdc
 Vendor:           GoodData
 Group:            GoodData/Tools
 
-License:          Gooddata proprietary
+License:          ISC
 URL:              https://github.com/gooddata/serverspec-core
 Source0:          sources.tar
 BuildArch:        x86_64
