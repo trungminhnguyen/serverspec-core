@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.9.6
-Release:          2%{?dist}.gdc
+Version:          1.9.7
+Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -71,6 +71,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Mon Oct 03 2016 Martin Surovcak <martin.surovcak@gooddata.com> 1.9.7-1%{?dist}.gdc
+- cron_run allows passing fqdn as an argument
+
 * Tue Aug 30 2016 Martin Surovcak <martin.surovcak@gooddata.com> 1.9.6-2%{?dist}.gdc
 - fix typo in changelog
 - fix missing redirect of date to logfile
