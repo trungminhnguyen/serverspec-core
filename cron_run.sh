@@ -1,14 +1,11 @@
 #!/bin/bash
 
-if [[ -z "$1" ]]; then
-  fqdn=`hostname -f`
-else
-  fqdn=$1
-fi
-
-serverspec "check:server:$fqdn $*" &> ./cron_run.log
+fqdn=$1
+shift
 
 echo $(date) >> ./cron_run.log
+
+serverspec "check:server:$fqdn $*" &> ./cron_run.log
 
 if [ $? -ne 0 ];then
   cat ./cron_run.log
