@@ -1,18 +1,23 @@
 #!/bin/bash
 
-fqdn=$1
+FQDN=$1
 shift
+source /etc/profile
+TEMP='./serverspec_tmp.log'
 
-echo $(date) >> ./cron_run.log
-
-serverspec "check:server:$fqdn $*" &> ./cron_run.log
-
-if [ $? -ne 0 ];then
-  cat ./cron_run.log
-  echo 'LAST RUN: Failed' >> ./cron_run.log
-else
-  echo 'LAST RUN: OK' >> ./cron_run.log
+serverspec "check:server:$FQDN $*" &> $TEMP
+EXIT_CODE=$?
+RESULT="$(grep -Pe "\d+ examples?, \d+ failures?, \d+ pending" $TEMP)"
+if [ -z "$RESULT" ]; then
+	RESULT="Result is null"
 fi
 
-cat ./cron_run.log >> /var/log/serverspec.log
-rm -f ./cron_run.log
+if [ $EXIT_CODE -ne 0 ];then
+  echo "$(date +%s) - LAST RUN: Failed - $RESULT" >> $TEMP
+else
+  echo "$(date +%s) - LAST RUN: OK - $RESULT" >> $TEMP
+fi
+
+cat $TEMP >> /var/log/serverspec.log
+rm -f $TEMP
+
