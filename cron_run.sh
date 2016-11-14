@@ -7,7 +7,7 @@ TEMP='./serverspec_tmp.log'
 
 serverspec "check:server:$FQDN $*" &> $TEMP
 EXIT_CODE=$?
-RESULT="$(grep -Pe "\d+ examples, \d+ failures(, \d+ pending)?" $TEMP)"
+RESULT="$(grep -Pe "\d+ examples?, \d+ failures?(, \d+ pending)?" $TEMP)"
 if [ -z "$RESULT" ]; then
 	RESULT="Result is null"
 fi
