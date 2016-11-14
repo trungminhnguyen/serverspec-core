@@ -2,7 +2,7 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.9.9
+Version:          1.9.10
 Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
@@ -71,6 +71,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Mon Nov 14 2016 Martin Ducar <martin.ducar@gooddata.com> 1.9.10-1%{?dist}.gdc
+- cron_run possible verb/verbs fix
+
 * Mon Nov 14 2016 Hung Cao <hung.cao@gooddata.com> 1.9.9-1%{?dist}.gdc
 - cron_run improvements for better nrpe integration
 
