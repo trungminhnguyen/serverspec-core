@@ -1,9 +1,4 @@
 #!/bin/bash
 set -e
 cd /opt/gdc/serverspec-core
-release=`lsb_release -rs`
-if [[ "${release}" =~ 6\..* ]]; then
-	scl enable ruby193 "bundle exec 'rake $*'"
-else
-	bundle exec "rake $*"
-fi
+bundle exec "rake $*"

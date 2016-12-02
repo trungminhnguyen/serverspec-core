@@ -3,7 +3,7 @@
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
 Version:          1.9.10
-Release:          1%{?dist}.gdc
+Release:          2%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -20,10 +20,14 @@ Requires:         ruby193-rubygem-bundler >= 1.11.2-5, nc
 Requires:         rubygem-bundler nmap-ncat
 %endif
 
-Requires:         redhat-lsb-core
-
 %prep
 %setup -q -c
+
+%build
+%if "%{?dist}" == ".el6"
+# Use scl on EL6
+sed -i '/rake/s/.*/scl enable ruby193 "bundle exec '\''rake $*'\'\"/ bin/serverspec
+%endif
 
 %install
 rm -fr $RPM_BUILD_ROOT
@@ -71,6 +75,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Fri Dec 02 2016 Dinar Valeev <dinar.valeev@gooddata.com> 1.9.10-2%{?dist}.gdc
+- don't require lsb-redhat-core
+
 * Mon Nov 14 2016 Martin Ducar <martin.ducar@gooddata.com> 1.9.10-1%{?dist}.gdc
 - cron_run possible verb/verbs fix
 
