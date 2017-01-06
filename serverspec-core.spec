@@ -2,8 +2,8 @@
 
 Name:             serverspec-core
 Summary:          GoodData ServerSpec integration
-Version:          1.9.10
-Release:          2%{?dist}.gdc
+Version:          1.9.11
+Release:          1%{?dist}.gdc
 
 Vendor:           GoodData
 Group:            GoodData/Tools
@@ -75,6 +75,9 @@ GoodData ServerSpec integration - core package
 %exclude %{install_dir}/spec/types/.gitignore
 
 %changelog
+* Fri Jan 06 2017 Yury Tsarev <yury.tsarev@gooddata.com> 1.9.11-1%{?dist}.gdc
+- set serverspec backend early
+
 * Fri Dec 02 2016 Dinar Valeev <dinar.valeev@gooddata.com> 1.9.10-2%{?dist}.gdc
 - don't require lsb-redhat-core
 
