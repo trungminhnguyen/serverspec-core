@@ -9,6 +9,11 @@ require 'net/ssh'
 require 'rspec/its'
 require './cfg/cfg_helper'
 
+backend = ENV['SERVERSPEC_BACKEND'] || :ssh
+set :backend, backend
+set :ssh_options, user: 'root'
+set :path, '$PATH:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin'
+
 # init SPEC_DIR so it can be used in specs
 SPEC_DIR = get_config_option('SPEC_DIR', './spec')
 
@@ -20,11 +25,6 @@ Dir[SPEC_DIR + '/**/*_helper.rb', './spec/**/*_helper.rb'].sort.each { |f| requi
 Dir['./spec/types/*.rb'].sort.each { |f| require f }
 Dir[SPEC_DIR + '/types/*.rb'].sort.each { |f| require f }
 include Serverspec::Type
-
-backend = ENV['SERVERSPEC_BACKEND'] || :ssh
-set :backend, backend
-set :ssh_options, user: 'root'
-set :path, '$PATH:/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin'
 
 RSpec.configure do |c|
   c.expect_with :rspec do |config|
