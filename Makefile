@@ -6,6 +6,6 @@ tarball:
 	else                                    \
 		$(bundle);                      \
 	fi &> bundle.log
-	tar cvf sources.tar * .bundle
+	tar cvf sources.tar $(shell git ls-tree  --name-only HEAD) .bundle
 clean:
 	rm -rf sources.tar
