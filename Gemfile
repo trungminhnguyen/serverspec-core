@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem "rake"
 gem "serverspec", '~> 2.20'
 gem "specinfra", '~> 2.40'
+gem "activesupport", '~> 4'
+gem "docker-api"
 gem "colorize"
 gem "parseconfig"
 gem "rspec_junit_formatter", github: 'gooddata/rspec_junit_formatter',
