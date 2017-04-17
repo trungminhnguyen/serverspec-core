@@ -6,6 +6,7 @@ gem "specinfra", '~> 2.40'
 gem "activesupport", '~> 4'
 gem "docker-api"
 gem "colorize"
+gem "fuubar"
 gem "parseconfig"
 gem "rspec_junit_formatter", github: 'gooddata/rspec_junit_formatter',
                              branch: 'yut-qa-5784'
